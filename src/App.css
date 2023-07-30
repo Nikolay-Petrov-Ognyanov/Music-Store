@@ -14,15 +14,6 @@ main {
   flex-grow: 1;
 }
 
-h1 {
-  font-size: 4vw;
-}
-
-h2,
-p {
-  margin-bottom: 2vw;
-}
-
 .App {
   height: 100vh;
   display: flex;

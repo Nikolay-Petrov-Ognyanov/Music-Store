@@ -1,14 +1,24 @@
+.footer {
+    width: 100vw;
+}
+
 .nav {
+    height: 3vw;
+    margin: 1vw 0;
     display: flex;
-    justify-content: space-evenly;
-    padding: 0 10vw;
+    justify-content: space-between;
+    padding: 0 10.5vw;
 }
 
 .button {
-    border: 0.175vw solid;
+    border: 0.2vw solid;
     border-radius: 2vw;
-    width: 20vw;
+    width: 23vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    font-size: 2vw;
 }
 
 .button:hover {

@@ -2,9 +2,9 @@ import "./App.css"
 import { Routes, Route } from "react-router-dom"
 import Footer from "./components/Footer/Footer"
 import Header from "./components/Header/Header"
-import Terms_and_Conditions from "./components/About/Terms_and_Contidions"
-import Privacy_Policy from "./components/About/Privacy_Policy"
-import Contact_Us from "./components/About/Contact_Us"
+import TermsAndConditions from "./components/About/TermsAndContidions"
+import PrivacyPolicy from "./components/About/PrivacyPolicy"
+import ContactUs from "./components/About/ContactUs"
 
 export default function App() {
 	return <div className="App">
@@ -13,17 +13,17 @@ export default function App() {
 		<main> <Routes>
 			<Route
 				path="/about/terms_and_conditions"
-				Component={Terms_and_Conditions}
+				element={<TermsAndConditions />}
 			/>
 
 			<Route
 				path="/about/privacy_policy"
-				Component={Privacy_Policy}
+				element={<PrivacyPolicy />}
 			/>
 
 			<Route
 				path="/about/contact_us"
-				Component={Contact_Us}
+				element={<ContactUs />}
 			/>
 		</Routes> </main>
 

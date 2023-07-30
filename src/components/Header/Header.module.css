@@ -5,15 +5,14 @@
 
 .header {
     width: 100vw;
-    height: 6vw;
-    padding: 2vw 0;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     position: sticky;
 }
 
-.header nav {
+.nav {
+    margin: 1vw 0;
     display: flex;
     justify-content: space-between;
     gap: 5vw;
@@ -22,9 +21,9 @@
 .button {
     font-size: 3vw;
     text-align: center;
-    border: 0.25vw solid;
-    border-radius: 2.5vw;
-    width: 20vw;
+    border: 0.3vw solid;
+    border-radius: 3vw;
+    width: 23vw;
 }
 
 .button:hover {
