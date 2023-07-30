@@ -10,9 +10,12 @@ a {
   text-decoration: none;
 }
 
+main {
+  height: calc(100vh - 10vw);
+}
+
 .active {
   color: black;
   border-color: white !important;
-  ;
   background-color: white
 }

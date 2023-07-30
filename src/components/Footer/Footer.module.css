@@ -1,0 +1,18 @@
+.nav {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 10vw;
+}
+
+.button {
+    border: 0.175vw solid;
+    border-radius: 2vw;
+    width: 20vw;
+    text-align: center;
+}
+
+.button:hover {
+    color: black;
+    border-color: white;
+    background-color: white;
+}

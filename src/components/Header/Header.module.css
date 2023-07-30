@@ -1,9 +1,9 @@
-.music_store_logo {
+.logo {
     height: 5vw;
     width: 5vw;
 }
 
-.main_header {
+.header {
     width: 100vw;
     height: 6vw;
     padding: 2vw 0;
@@ -13,21 +13,21 @@
     position: sticky;
 }
 
-.main_header nav {
+.header nav {
     display: flex;
     justify-content: space-between;
     gap: 5vw;
 }
 
-.nav_button {
+.button {
     font-size: 3vw;
     text-align: center;
     border: 0.25vw solid;
-    border-radius: 3vw;
+    border-radius: 2.5vw;
     width: 20vw;
 }
 
-.nav_button:hover {
+.button:hover {
     color: black;
     border-color: white;
     background-color: white;
@@ -40,6 +40,7 @@
     position: relative;
     height: 5vw;
     width: 5vw;
+    pointer-events: none;
 }
 
 .cart_icon {
