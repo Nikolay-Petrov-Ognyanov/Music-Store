@@ -1,0 +1,1 @@
+export default function scrollToTop() { setTimeout(() => { window.scrollTo(0, 0) }) }
