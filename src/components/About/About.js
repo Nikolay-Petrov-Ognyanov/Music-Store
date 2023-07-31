@@ -1,0 +1,1 @@
+export default function About({ JSX }) { return JSX }

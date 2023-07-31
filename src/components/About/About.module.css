@@ -5,15 +5,19 @@
     font-size: 2vw;
 }
 
-p {
-    margin-bottom: 2vw;
-}
-
-h1 {
+.h1 {
     font-size: 4vw;
     margin-bottom: 2vw;
 }
 
-h2 {
+.h2 {
     margin-bottom: 0;
+}
+
+.p {
+    margin-bottom: 2vw;
+}
+
+.ul {
+    margin-top: 2vw !important;
 }
