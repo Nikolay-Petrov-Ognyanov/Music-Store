@@ -1,15 +1,9 @@
 import style from "./Footer.module.css"
 import { scrollToTop } from "../../utility/scrollToTop"
-import { NavLink, useLocation, useParams } from "react-router-dom"
-import { useEffect } from "react"
+import { NavLink, useLocation } from "react-router-dom"
 
 export default function Footer() {
-    const page = useLocation().pathname.split("/").pop()
-
-    useEffect(() => {
-        console.log(page)
-    }, [page])
-
+    const pathname = useLocation().pathname.split("/").pop()
 
     return <footer className={style.footer}> <nav className={style.nav}>
         <NavLink
@@ -18,8 +12,8 @@ export default function Footer() {
             activeclassname="active"
             onClick={scrollToTop}
         >
-            {page !== "contact_us" && "Contact Us"}
-            {page === "contact_us" && "Back to Top"}
+            {pathname !== "contact_us" && "Contact Us"}
+            {pathname === "contact_us" && "Back to Top"}
         </NavLink>
 
         <NavLink
@@ -28,8 +22,8 @@ export default function Footer() {
             activeclassname="active"
             onClick={scrollToTop}
         >
-            {page !== "faq" && "FAQ"}
-            {page === "faq" && "Back to Top"}
+            {pathname !== "faq" && "FAQ"}
+            {pathname === "faq" && "Back to Top"}
         </NavLink>
 
         <NavLink
@@ -38,8 +32,8 @@ export default function Footer() {
             activeclassname="active"
             onClick={scrollToTop}
         >
-            {page !== "terms_and_conditions" && "Terms and Conditions"}
-            {page === "terms_and_conditions" && "Back to Top"}
+            {pathname !== "terms_and_conditions" && "Terms and Conditions"}
+            {pathname === "terms_and_conditions" && "Back to Top"}
         </NavLink>
 
         <NavLink
@@ -48,8 +42,8 @@ export default function Footer() {
             activeclassname="active"
             onClick={scrollToTop}
         >
-            {page !== "privacy_policy" && "Privacy Policy"}
-            {page === "privacy_policy" && "Back to Top"}
+            {pathname !== "privacy_policy" && "Privacy Policy"}
+            {pathname === "privacy_policy" && "Back to Top"}
         </NavLink>
     </nav></footer>
 }

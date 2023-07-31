@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom"
-import contact_us from "./ContactUs"
-import faq from "./FAQ"
-import privacy_policy from "./PrivacyPolicy"
-import terms_and_conditions from "./PrivacyPolicy"
+import contact_us from "./contact_us"
+import faq from "./faq"
+import privacy_policy from "./privacy_policy"
+import terms_and_conditions from "./terms_and_conditions"
 
 export default function About() {
     const { page } = useParams()

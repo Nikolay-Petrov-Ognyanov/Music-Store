@@ -11,12 +11,17 @@ a {
 
 main {
   flex-grow: 1;
+  display: flex;
 }
 
 .App {
   height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.main_container {
+  width: 75vw;
 }
 
 .active {

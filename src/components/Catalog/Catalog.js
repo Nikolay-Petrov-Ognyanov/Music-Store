@@ -1,6 +1,7 @@
 import style from "./Catalog.module.css"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
+import Card from "../Card/Card"
 
 export default function Catalog() {
     const { category } = useParams()
@@ -23,6 +24,6 @@ export default function Catalog() {
     }, [category])
 
     return <section className={style.catalog}>
-        {data && data.map(i => <p key={i.id}>{i.name}</p>)}
+        {data && data.map(item => <Card key={item.id} item={item} />)}
     </section>
 }
