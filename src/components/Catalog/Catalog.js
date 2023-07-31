@@ -24,6 +24,10 @@ export default function Catalog() {
     }, [category])
 
     return <section className={style.catalog}>
-        {data && data.map(item => <Card key={item.id} item={item} />)}
+        <div className={style.sort} >Sort</div>
+
+        <div className={style.cards_wrapper}>
+            {data && data.map(item => <Card key={item.id} item={item} />)}
+        </div>
     </section>
 }

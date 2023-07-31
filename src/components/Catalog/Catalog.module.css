@@ -1,4 +1,15 @@
-.catalog  {
+.catalog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sort {
+    margin: 0 0 1vw 0;
+}
+
+.cards_wrapper {
     text-align: center;
     display: flex;
     flex-wrap: wrap;

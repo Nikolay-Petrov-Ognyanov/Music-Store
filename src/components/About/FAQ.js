@@ -1,7 +1,7 @@
 import style from "./About.module.css"
 
 const faq = <section className={style.section}>
-    <h1 className={style.h1}>Frequently Asked Questions - Music Store</h1>
+    <h1 className={style.h1}>Frequently Asked Questions</h1>
     <h2 className={style.h2}>1. How can I place an order?</h2>
     <p className={style.p}>To place an order, simply browse our website, add the desired products to your cart and proceed to checkout. Follow the steps to provide your shipping and payment information. Once your order is confirmed, you will receive an email with the order details.</p>
 

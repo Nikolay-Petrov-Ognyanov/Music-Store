@@ -1,7 +1,7 @@
 import style from "./About.module.css"
 
 const privacy_policy = <section className={style.section}>
-    <h1 className={style.h1}>Privacy Policy - Music Store</h1>
+    <h1 className={style.h1}>Privacy Policy</h1>
     <p className={style.p}>Welcome to Music Store's Privacy Policy. This document outlines how we collect, use and protect your personal information when you interact with our website and services. Your privacy is important to us and we are committed to ensuring that your data is handled securely and responsibly. By accessing or using Music Store, you consent to the practices described in this Privacy Policy.</p>
 
     <h2 className={style.h2}>1. Information We Collect:</h2>

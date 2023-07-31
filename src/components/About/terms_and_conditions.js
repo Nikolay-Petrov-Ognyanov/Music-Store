@@ -1,7 +1,7 @@
 import style from "./About.module.css"
 
 const terms_and_conditions = <section className={style.section}>
-        <h1 className={style.h1}>Terms and Conditions - Music Store</h1>
+        <h1 className={style.h1}>Terms and Conditions</h1>
         <p className={style.p}>Welcome to Music Store! These Terms and Conditions govern your use of our website and services. Please read them carefully before making any purchase or using our platform. By accessing or using Music Store, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, please do not use our website or services.</p>
 
         <h2 className={style.h2}>1. General Information:</h2>

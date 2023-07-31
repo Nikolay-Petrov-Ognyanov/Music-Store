@@ -1,7 +1,7 @@
 import style from "./About.module.css"
 
 const contact_us = <section className={style.section}>
-	<h1 className={style.h1}>Contact Us - Music Store</h1>
+	<h1 className={style.h1}>Contact Us</h1>
 	<p className={style.p}>If you have any questions, feedback or inquiries, please feel free to get in touch with us. We are here to assist you!</p>
 
 	<h2 className={style.h2}>Address:</h2>
