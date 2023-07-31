@@ -1,6 +1,6 @@
 import style from "./About.module.css"
 
-export default function ContactUs({pathname}) {
+export default function ContactUs() {
 	const storeAddress = `
     153 Music Street,
     Melody City,
@@ -10,7 +10,7 @@ export default function ContactUs({pathname}) {
 
 	return <section className={style.section}>
 		<h1>Contact Us - Music Store</h1>
-		<p>If you have any questions, feedback, or inquiries, please feel free to get in touch with us. We are here to assist you!</p>
+		<p>If you have any questions, feedback or inquiries, please feel free to get in touch with us. We are here to assist you!</p>
 
 		<h2>Address:</h2>
 		<p>{storeAddress}</p>

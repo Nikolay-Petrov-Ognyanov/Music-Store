@@ -2,6 +2,7 @@ html * {
   color: white;
   border-color: white;
   background-color: black;
+  user-select: none;
 }
 
 a {

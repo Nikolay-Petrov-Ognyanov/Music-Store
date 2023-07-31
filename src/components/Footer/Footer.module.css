@@ -1,19 +1,15 @@
-.footer {
-    width: 100vw;
-}
-
 .nav {
+    width: 100vw;
     height: 3vw;
     margin: 1vw 0;
     display: flex;
-    justify-content: space-between;
-    padding: 0 10.5vw;
+    justify-content: space-evenly;
 }
 
 .button {
     border: 0.2vw solid;
     border-radius: 2vw;
-    width: 23vw;
+    width: 22.5vw;
     display: flex;
     justify-content: center;
     align-items: center;
