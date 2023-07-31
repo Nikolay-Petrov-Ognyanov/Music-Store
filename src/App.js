@@ -14,40 +14,8 @@ export default function App() {
 		<Header />
 
 		<main> <Routes>
-			<Route
-				path="/catalog/:category"
-				element={<Catalog />}
-			/>
-
-			{/* <Route
-				path="/catalog/keyboards"
-				element={<Catalog />}
-			/>
-
-			<Route
-				path="/catalog/synthesizers"
-				element={<Catalog />}
-			/>
-
-			<Route
-				path="/about/contact_us"
-				element={<About JSX={ContactUs} />}
-			/> */}
-
-			<Route
-				path="/about/faq"
-				element={<About JSX={FAQ} />}
-			/>
-
-			<Route
-				path="/about/terms_and_conditions"
-				element={<About JSX={TermsAndConditions} />}
-			/>
-
-			<Route
-				path="/about/privacy_policy"
-				element={<About JSX={PrivacyPolicy} />}
-			/>
+			<Route path="/catalog/:category" element={<Catalog />} />
+			<Route path="/about/:page" element={<About />} />
 		</Routes> </main>
 
 		<Footer />

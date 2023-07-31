@@ -1,6 +1,6 @@
 import style from "./About.module.css"
 
-const PrivacyPolicy_JSX = <section className={style.section}>
+const privacy_policy = <section className={style.section}>
     <h1 className={style.h1}>Privacy Policy - Music Store</h1>
     <p className={style.p}>Welcome to Music Store's Privacy Policy. This document outlines how we collect, use and protect your personal information when you interact with our website and services. Your privacy is important to us and we are committed to ensuring that your data is handled securely and responsibly. By accessing or using Music Store, you consent to the practices described in this Privacy Policy.</p>
 
@@ -32,4 +32,4 @@ const PrivacyPolicy_JSX = <section className={style.section}>
     <p className={style.p}>Thank you for trusting Music Store with your personal information. We are committed to safeguarding your privacy and providing a secure shopping experience.</p>
 </section>
 
-export default PrivacyPolicy_JSX
+export default privacy_policy

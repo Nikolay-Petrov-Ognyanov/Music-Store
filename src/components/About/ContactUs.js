@@ -1,6 +1,6 @@
 import style from "./About.module.css"
 
-const ContactUs_JSX = <section className={style.section}>
+const contact_us = <section className={style.section}>
 	<h1 className={style.h1}>Contact Us - Music Store</h1>
 	<p className={style.p}>If you have any questions, feedback or inquiries, please feel free to get in touch with us. We are here to assist you!</p>
 
@@ -18,4 +18,4 @@ const ContactUs_JSX = <section className={style.section}>
 	<p className={style.p}>We look forward to hearing from you and providing the best support for your musical needs.</p>
 </section>
 
-export default ContactUs_JSX
+export default contact_us

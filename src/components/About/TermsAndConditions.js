@@ -1,6 +1,6 @@
 import style from "./About.module.css"
 
-const TermsAndConditions_JSX = <section className={style.section}>
+const terms_and_conditions = <section className={style.section}>
         <h1 className={style.h1}>Terms and Conditions - Music Store</h1>
         <p className={style.p}>Welcome to Music Store! These Terms and Conditions govern your use of our website and services. Please read them carefully before making any purchase or using our platform. By accessing or using Music Store, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, please do not use our website or services.</p>
 
@@ -47,4 +47,4 @@ const TermsAndConditions_JSX = <section className={style.section}>
         <p className={style.p}>Thank you for choosing Music Store! If you have any questions or concerns about these Terms and Conditions, please don't hesitate to contact our customer support. Happy shopping!</p>
 </section>
 
-export default TermsAndConditions_JSX
+export default terms_and_conditions

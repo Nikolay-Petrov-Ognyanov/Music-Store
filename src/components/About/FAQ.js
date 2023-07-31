@@ -1,6 +1,6 @@
 import style from "./About.module.css"
 
-const FAQ_JSX = <section className={style.section}>
+const faq = <section className={style.section}>
     <h1 className={style.h1}>Frequently Asked Questions - Music Store</h1>
     <h2 className={style.h2}>1. How can I place an order?</h2>
     <p className={style.p}>To place an order, simply browse our website, add the desired products to your cart and proceed to checkout. Follow the steps to provide your shipping and payment information. Once your order is confirmed, you will receive an email with the order details.</p>
@@ -31,14 +31,14 @@ const FAQ_JSX = <section className={style.section}>
 
     <h2 className={style.h2}>10. How can I contact customer support?</h2>
     <p className={style.p}>If you have any questions, concerns or need assistance, you can reach our customer support team through the following channels:
-        <ul className={style.ul}>
-            <li>Email: support@musicstore.com</li>
-            <li>Phone: 0123456789</li>
-            <li>Live Chat: Available on our website during business hours</li>
-        </ul>
     </p>
+    <ul className={style.ul}>
+        <li>Email: support@musicstore.com</li>
+        <li>Phone: 0123456789</li>
+        <li>Live Chat: Available on our website during business hours</li>
+    </ul>
 
     <p className={style.p}>If you have any other questions or need further information, don't hesitate to contact us. We're here to help!</p>
 </section>
 
-export default FAQ_JSX
+export default faq
