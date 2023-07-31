@@ -15,11 +15,11 @@ export default function App() {
 
 		<main> <Routes>
 			<Route
-				path="/catalog/accordions"
+				path="/catalog/:category"
 				element={<Catalog />}
 			/>
 
-			<Route
+			{/* <Route
 				path="/catalog/keyboards"
 				element={<Catalog />}
 			/>
@@ -32,7 +32,7 @@ export default function App() {
 			<Route
 				path="/about/contact_us"
 				element={<About JSX={ContactUs} />}
-			/>
+			/> */}
 
 			<Route
 				path="/about/faq"

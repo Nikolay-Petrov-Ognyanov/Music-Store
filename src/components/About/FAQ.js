@@ -3,7 +3,7 @@ import style from "./About.module.css"
 const FAQ_JSX = <section className={style.section}>
     <h1 className={style.h1}>Frequently Asked Questions - Music Store</h1>
     <h2 className={style.h2}>1. How can I place an order?</h2>
-    <p className={style.p}>To place an order, simply browse our website, add the desired products to your cart, and proceed to checkout. Follow the steps to provide your shipping and payment information. Once your order is confirmed, you will receive an email with the order details.</p>
+    <p className={style.p}>To place an order, simply browse our website, add the desired products to your cart and proceed to checkout. Follow the steps to provide your shipping and payment information. Once your order is confirmed, you will receive an email with the order details.</p>
 
     <h2 className={style.h2}>2. What payment methods do you accept?</h2>
     <p className={style.p}>We accept various payment methods, including credit/debit cards and other online payment options. Rest assured that your payment information is secure and protected.</p>
@@ -21,16 +21,16 @@ const FAQ_JSX = <section className={style.section}>
     <p className={style.p}>We strive to process and ship orders promptly. Delivery times may vary depending on your location and product availability. We will provide estimated delivery times during the checkout process, but please note that these are not guaranteed.</p>
 
     <h2 className={style.h2}>7. Can I cancel my order?</h2>
-    <p className={style.p}>If you wish to cancel your order, please contact our customer support as soon as possible. If your order has not been shipped, we will do our best to accommodate your request. However, once the order is shipped, it cannot be canceled, and you may need to follow the return process.</p>
+    <p className={style.p}>If you wish to cancel your order, please contact our customer support as soon as possible. If your order has not been shipped, we will do our best to accommodate your request. However, once the order is shipped, it cannot be canceled and you may need to follow the return process.</p>
 
     <h2 className={style.h2}>8. Are there any exclusions for returns?</h2>
-    <p className={style.p}>While most products are eligible for return or exchange, certain items, such as software, digital downloads, and personalized products, may not be eligible. Please review our Returns and Refunds policy for specific details on eligible items.</p>
+    <p className={style.p}>While most products are eligible for return or exchange, certain items, such as software, digital downloads and personalized products, may not be eligible. Please review our Returns and Refunds policy for specific details on eligible items.</p>
 
     <h2 className={style.h2}>9. Do you offer warranty on your products?</h2>
     <p className={style.p}>Yes, many of our products come with a manufacturer's warranty. Warranty details can be found on the product pages or in the product documentation. If you encounter any issues with a warranted item, please contact our customer support for assistance.</p>
 
     <h2 className={style.h2}>10. How can I contact customer support?</h2>
-    <p className={style.p}>If you have any questions, concerns, or need assistance, you can reach our customer support team through the following channels:
+    <p className={style.p}>If you have any questions, concerns or need assistance, you can reach our customer support team through the following channels:
         <ul className={style.ul}>
             <li>Email: support@musicstore.com</li>
             <li>Phone: 0123456789</li>
