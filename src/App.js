@@ -4,10 +4,6 @@ import Footer from "./components/Footer/Footer"
 import Header from "./components/Header/Header"
 import Catalog from "./components/Catalog/Catalog"
 import About from "./components/About/About"
-import ContactUs from "./components/About/ContactUs"
-import FAQ from "./components/About/FAQ"
-import PrivacyPolicy from "./components/About/PrivacyPolicy"
-import TermsAndConditions from "./components/About/TermsAndConditions"
 
 export default function App() {
 	return <div className="App">
