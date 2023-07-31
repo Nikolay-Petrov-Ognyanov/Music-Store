@@ -1,10 +1,8 @@
 .logo_wrapper {
-    width: 25vw;
+    width: 22.5vw;
     display: flex;
-    padding-left: 2vw;
     justify-content: space-between;
     align-items: center;
-    /* gap: 1vw; */
 }
 
 .logo {
@@ -20,6 +18,7 @@
     margin: 1vw 0;
     width: 100vw;
     display: flex;
+    justify-content: space-evenly;
     position: sticky;
 }
 
@@ -33,7 +32,7 @@
     font-size: 3vw;
     text-align: center;
     border: 0.3vw solid;
-    /* border-radius: 3vw; */
+    border-radius: 3vw;
     width: 22.5vw;
 }
 

@@ -21,7 +21,8 @@ main {
 }
 
 .main_container {
-  width: 75vw;
+  width: 75.5vw;
+  padding: 0 2vw;
 }
 
 .active {

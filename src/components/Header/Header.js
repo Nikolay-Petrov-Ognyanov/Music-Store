@@ -12,7 +12,7 @@ export default function Header() {
             <span className={style.music_store} >Music Store</span>
         </div>
 
-        <nav className={style.nav}>
+        {/* <nav className={style.nav}> */}
             <NavLink
                 to={"/catalog/accordions"}
                 className={style.button}
@@ -30,7 +30,7 @@ export default function Header() {
                 className={style.button}
                 activeclassname="active"
             >Synthesizers</NavLink >
-        </nav>
+        {/* </nav> */}
 
         {/* <div className={style.cart}>
             <FontAwesomeIcon icon={faCartShopping} className={style.cart_icon} />
