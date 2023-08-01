@@ -3,55 +3,49 @@ import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Card from "../Card/Card"
 
-export default function Catalog({ pathname }) {
-    const navigate = useNavigate()
-
-    if (pathname) navigate(`/catalog/${pathname}`)
-
+export default function Catalog() {
     const { category } = useParams()
-
+    const navigate = useNavigate()
     const [data, setData] = useState(null)
 
     useEffect(() => {
+        if (!category) navigate("/catalog/accordions")
+
+        // setTimeout(() => window.scrollTo(0, 0), 100)
+
         async function fetchData() {
             try {
                 const response = await fetch("/database.json")
                 const data = await response.json()
 
-                if (category) {
-                    setData(data[category])
-                } else if (pathname) {
-                    setData(data[pathname])
-                }
-
-                setData(data[category || pathname])
+                setData(data[category || "accordions"])
             } catch (error) {
                 console.error(error)
             }
         }
 
         fetchData()
-    }, [category, pathname])
+    }, [category, navigate])
 
     return <section className={style.catalog}>
         <div className={style.top}>
-            <div className="sorting_container">
+            <div>
                 <label htmlFor="sort_by">Sort by: </label>
 
                 <select className={style.select} name="sort_by">
-                    <option value="alphabetical: a-z">
+                    <option class={style.option} value="alphabetical: a-z">
                         Alphabetical A-Z
                     </option>
 
-                    <option value="alphabetical: z-a">
+                    <option class={style.option} value="alphabetical: z-a">
                         Alphabetical Z-A
                     </option>
 
-                    <option value="price: ascending">
+                    <option class={style.option} value="price: ascending">
                         Price ascending
                     </option>
 
-                    <option value="price: descending">
+                    <option class={style.option} value="price: descending">
                         Price descending
                     </option>
                 </select>

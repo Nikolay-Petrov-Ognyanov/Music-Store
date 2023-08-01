@@ -25,14 +25,13 @@ export default function Card({ item }) {
             <p className={style.description}>{item.description}</p>
 
             <p className={style.price}>
-                {
-                    item.discount > 0 &&
-                    <span className={style.previous_price}>
-                        {(item.price / (1 - item.discount)).toFixed(2)} BGN
-                    </span>
-                }
+                {item.discount > 0 && <span className={style.previous_price}>
+                    {(item.price / (1 - item.discount)).toFixed(2)} BGN
+                </span>}
 
-                <span className={style.current_price}>{item.price} BGN</span>
+                <span className={style.current_price}>
+                    {item.price.toFixed(2)} BGN
+                </span>
             </p>
 
             <button className={style.button} >Add to cart</button>
