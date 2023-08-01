@@ -11,8 +11,6 @@ export default function Catalog() {
     useEffect(() => {
         if (!category) navigate("/catalog/accordions")
 
-        // setTimeout(() => window.scrollTo(0, 0), 100)
-
         async function fetchData() {
             try {
                 const response = await fetch("/database.json")

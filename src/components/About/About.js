@@ -8,8 +8,6 @@ import { useEffect } from "react"
 export default function About() {
     const { page } = useParams()
 
-    // useEffect(() => { setTimeout(() => window.scrollTo(0, 0), 100) }, [])
-
     const about = {
         contact_us,
         faq,

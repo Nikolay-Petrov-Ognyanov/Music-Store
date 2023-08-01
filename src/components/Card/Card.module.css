@@ -14,6 +14,12 @@
     color: white;
 }
 
+.spix_96 {
+    scale: 1.31;
+    margin-left: 1.5vw;
+    margin-bottom: 0.6vw;
+}
+
 .text_container {
     height: 17.5vw;
     border-left: 0.25vw solid;

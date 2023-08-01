@@ -2,8 +2,6 @@ import style from "./Header.module.css"
 import logo from "../../music-store-logo.png"
 import { NavLink } from "react-router-dom"
 import { scrollToTop } from "../../utility/scrollToTop"
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-// import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
 
 export default function Header() {
     return <header className={style.header}>
@@ -35,11 +33,5 @@ export default function Header() {
                 activeclassname="active"
             >Synthesizers</NavLink >
         </nav>
-
-        {/* <div className={style.cart}>
-            <FontAwesomeIcon icon={faCartShopping} className={style.cart_icon} />
-
-            <p className={style.items_in_cart_count}>0</p>
-        </div> */}
     </header>
 }

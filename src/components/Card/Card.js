@@ -4,15 +4,15 @@ import { faStar } from "@fortawesome/free-solid-svg-icons"
 
 export default function Card({ item }) {
     const stars = Array.from({ length: item.rating }, (star, index) => (
-        <FontAwesomeIcon
-            key={index}
-            icon={faStar}
-        />
+        <FontAwesomeIcon key={index} icon={faStar} />
     ))
 
     return <article className={style.article}>
         <div className={style.image_container}>
-            <img src={item.image} alt={item.name} />
+            <img
+                src={item.image} alt={item.name}
+                className={item.name === "SPIX 96" && style.spix_96}
+            />
         </div>
 
         <div className={style.text_container}>
