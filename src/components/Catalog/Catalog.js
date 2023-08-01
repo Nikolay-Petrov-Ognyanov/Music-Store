@@ -24,10 +24,43 @@ export default function Catalog() {
     }, [category])
 
     return <section className={style.catalog}>
-        <div className={style.sort} >Sort</div>
+        <div className={style.top}>
+            <div className="sorting_container">
+                <label htmlFor="sort_by">Sort by: </label>
 
-        <div className={style.cards_wrapper}>
-            {data && data.map(item => <Card key={item.id} item={item} />)}
+                <select className={style.select} name="sort_by">
+                    <option value="alphabetical: a-z">
+                        Alphabetical A-Z
+                    </option>
+
+                    <option value="alphabetical: z-a">
+                        Alphabetical Z-A
+                    </option>
+
+                    <option value="price: ascending">
+                        Price ascending
+                    </option>
+
+                    <option value="price: descending">
+                        Price ascending
+                    </option>
+                </select>
+            </div>
+
+            <span>Showing X products out of Y</span>
+        </div>
+
+        <div className={style.bottom}>
+            <aside className={style.left}>
+                Filter by:
+            </aside>
+
+            <div className={style.right}>
+
+                <div className={style.cards}>
+                    {data && data.map(item => <Card key={item.id} item={item} />)}
+                </div>
+            </div>
         </div>
     </section>
 }

@@ -6,31 +6,31 @@ import { NavLink } from "react-router-dom"
 
 export default function Header() {
     return <header className={style.header}>
+        <nav className={style.nav}>
         <div className={style.logo_wrapper} >
             <img src={logo} className={style.logo} alt="logo" />
 
             <span className={style.music_store} >Music Store</span>
         </div>
 
-        {/* <nav className={style.nav}> */}
-            <NavLink
-                to={"/catalog/accordions"}
-                className={style.button}
-                activeclassname="active"
-            >Accordions</NavLink >
+        <NavLink
+            to={"/catalog/accordions"}
+            className={style.button}
+            activeclassname="active"
+        >Accordions</NavLink >
 
-            <NavLink
-                to={"/catalog/keyboards"}
-                className={style.button}
-                activeclassname="active"
-            >Keyboards</NavLink >
+        <NavLink
+            to={"/catalog/keyboards"}
+            className={style.button}
+            activeclassname="active"
+        >Keyboards</NavLink >
 
-            <NavLink
-                to={"/catalog/synthesizers"}
-                className={style.button}
-                activeclassname="active"
-            >Synthesizers</NavLink >
-        {/* </nav> */}
+        <NavLink
+            to={"/catalog/synthesizers"}
+            className={style.button}
+            activeclassname="active"
+        >Synthesizers</NavLink >
+        </nav>
 
         {/* <div className={style.cart}>
             <FontAwesomeIcon icon={faCartShopping} className={style.cart_icon} />

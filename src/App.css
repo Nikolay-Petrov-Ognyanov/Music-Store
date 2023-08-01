@@ -5,6 +5,10 @@ html * {
   user-select: none;
 }
 
+body {
+  margin: 0 2vw;
+}
+
 a {
   text-decoration: none;
 }
@@ -15,9 +19,9 @@ main {
 }
 
 .App {
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .main_container {

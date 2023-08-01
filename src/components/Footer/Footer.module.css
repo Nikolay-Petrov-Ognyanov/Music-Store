@@ -1,15 +1,15 @@
 .nav {
-    width: 100vw;
+    width: 96vw;
     height: 3vw;
     margin: 1vw 0;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .button {
     border: 0.2vw solid;
     border-radius: 2vw;
-    width: 22.5vw;
+    width: 23.25vw;
     display: flex;
     justify-content: center;
     align-items: center;

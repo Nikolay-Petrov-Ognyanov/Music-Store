@@ -1,39 +1,44 @@
 .logo_wrapper {
-    width: 22.5vw;
+    width: 23.25vw;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    overflow: hidden;
 }
 
 .logo {
-    height: 5vw;
-    width: 5vw;
+    height: 2vw;
+    width: 2vw;
 }
 
 .music_store {
-    font-size: 3vw;
+    font-size: 2vw
 }
 
 .header {
-    margin: 1vw 0;
-    width: 100vw;
-    display: flex;
-    justify-content: space-evenly;
+    width: 96vw;
     position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .nav {
-    margin: 0 2vw;
+    padding: 1vw 0;
+    width: 96vw;
     display: flex;
-    gap: 2vw;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .button {
-    font-size: 3vw;
+    font-size: 2vw;
     text-align: center;
-    border: 0.3vw solid;
-    border-radius: 3vw;
-    width: 22.5vw;
+    border: 0.25vw solid;
+    border-radius: 2vw;
+    width: 23.25vw;
 }
 
 .button:hover {
