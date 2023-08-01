@@ -255,7 +255,7 @@
         {
             "id": "KEY0005561-000",
             "name": "SAI 96",
-            "description": "Scandalli AIR I 37 Tasten,96 Bass",
+            "description": "Scandalli AIR I 37 Tasten, 96 Bass",
             "price": 8896.93,
             "discount": 0.10,
             "image": "https://images.musicstore.de/images/0960/scandalli-air-i-37-tasten-96-bass_1_KEY0005561-000.jpg",
@@ -500,8 +500,8 @@
             "description": "The Keybaord offers a selection of over 1150 sounds and 280 rhythms.",
             "price": 1464.89,
             "discount": 0,
-            "image": "",
-            "manufacturer": "",
+            "image": "https://images.musicstore.de/images/0960/medeli-akx10-61-note-digital-arranger-workstation-black-_1_KEY0005421-000.jpg",
+            "manufacturer": "Medeli",
             "keys": 0,
             "rating": 5,
             "ratings": 21

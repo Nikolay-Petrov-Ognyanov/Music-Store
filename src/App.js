@@ -12,6 +12,8 @@ export default function App() {
 		<main> <Routes>
 			<Route path="/catalog/:category" element={<Catalog />} />
 			<Route path="/about/:page" element={<About />} />
+			{/* <Route path="*" element={<Catalog pathname={"accordions"} />} /> */}
+			<Route path="*" />
 		</Routes> </main>
 
 		<Footer />

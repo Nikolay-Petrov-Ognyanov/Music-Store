@@ -4,6 +4,7 @@
     margin: 1vw 0;
     display: flex;
     justify-content: space-between;
+    color: white;
 }
 
 .button {
@@ -15,6 +16,7 @@
     align-items: center;
     text-align: center;
     font-size: 2vw;
+    color: white;
 }
 
 .button:hover {

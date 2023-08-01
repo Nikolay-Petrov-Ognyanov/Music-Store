@@ -1,19 +1,25 @@
-html * {
-  color: white;
+* {
   border-color: white;
   background-color: black;
   user-select: none;
 }
 
+.stars {
+  color: gold !important;
+}
+
 body {
+  color: white;
   margin: 0 2vw;
 }
 
 a {
+  color: white;
   text-decoration: none;
 }
 
 main {
+  color: white;
   flex-grow: 1;
   display: flex;
 }
@@ -21,16 +27,18 @@ main {
 .App {
   display: flex;
   flex-direction: column;
+  color: white;
   position: relative;
 }
 
 .main_container {
   width: 75.5vw;
+  color: white;
   padding: 0 2vw;
 }
 
 .active {
-  color: black;
+  color: black !important;
   border-color: white !important;
   background-color: white
 }

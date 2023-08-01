@@ -1,9 +1,13 @@
 import style from "./Catalog.module.css"
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Card from "../Card/Card"
 
-export default function Catalog() {
+export default function Catalog({ pathname }) {
+    const navigate = useNavigate()
+
+    if (pathname) navigate(`/catalog/${pathname}`)
+
     const { category } = useParams()
 
     const [data, setData] = useState(null)
@@ -14,14 +18,20 @@ export default function Catalog() {
                 const response = await fetch("/database.json")
                 const data = await response.json()
 
-                setData(data[category])
+                if (category) {
+                    setData(data[category])
+                } else if (pathname) {
+                    setData(data[pathname])
+                }
+
+                setData(data[category || pathname])
             } catch (error) {
                 console.error(error)
             }
         }
 
         fetchData()
-    }, [category])
+    }, [category, pathname])
 
     return <section className={style.catalog}>
         <div className={style.top}>
@@ -42,7 +52,7 @@ export default function Catalog() {
                     </option>
 
                     <option value="price: descending">
-                        Price ascending
+                        Price descending
                     </option>
                 </select>
             </div>

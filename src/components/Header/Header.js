@@ -10,7 +10,7 @@ export default function Header() {
         <div className={style.logo_wrapper} >
             <img src={logo} className={style.logo} alt="logo" />
 
-            <span className={style.music_store} >Music Store</span>
+            <span className={style.music_store}>MUSIC STORE</span>
         </div>
 
         <NavLink
