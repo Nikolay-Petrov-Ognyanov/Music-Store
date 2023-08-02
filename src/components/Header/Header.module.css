@@ -52,30 +52,3 @@
     border-color: white;
     background-color: white;
 }
-
-/* .cart {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 5vw;
-    width: 5vw;
-    pointer-events: none;
-    color: white;
-}
-
-.cart_icon {
-    font-size: 5vw;
-    color: white;
-}
-
-.items_in_cart_count {
-    position: absolute;
-    color: black;
-    background-color: transparent;
-    font-size: 2vw;
-    top: 32%;
-    left: 57%;
-    transform: translate(-50%, -50%);
-    color: white;
-} */

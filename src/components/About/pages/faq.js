@@ -1,4 +1,4 @@
-import style from "./About.module.css"
+import style from "../About.module.css"
 
 const faq = <section className={style.section}>
     <h1 className={style.h1}>Frequently Asked Questions</h1>

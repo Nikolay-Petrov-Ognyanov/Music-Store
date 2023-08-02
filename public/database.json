@@ -376,7 +376,7 @@
         },
         {
             "id": "KEY0004457-000",
-            "name": "Fame G-300 61-Note Portable Keyboard (Black)",
+            "name": "Fame G-300",
             "description": "The Fame G-300 is an ideal beginner keyboard.",
             "price": 252.30,
             "discount": 0.20,
@@ -388,7 +388,7 @@
         },
         {
             "id": "KEY0004458-000",
-            "name": "Fame G-400 61-Note Portable Keyboard (Black)",
+            "name": "Fame G-400",
             "description": "The Fame G-400 includes a selection of 653 very high quality tones.",
             "price": 330.53,
             "discount": 0,
@@ -400,7 +400,7 @@
         },
         {
             "id": "KEY0005818-000",
-            "name": "Roland E-X10 Homekeyboard",
+            "name": "Roland E-X10",
             "description": "USB MIDI Interface, 601 sounds, 207 styles;",
             "price": 431.84,
             "discount": 0.10,
@@ -448,7 +448,7 @@
         },
         {
             "id": "KEY0005108-000",
-            "name": "Casio CT-S100 Casiotone (Black)",
+            "name": "Casio CT-S100 Casiotone",
             "description": "122x tones, 61x rhythms and an on-board Dance Music Mode.",
             "price": 187.37,
             "discount": 0.10,
@@ -460,7 +460,7 @@
         },
         {
             "id": "KEY0005107-000",
-            "name": "Casio CT-S200 Casiotone (White)",
+            "name": "Casio CT-S200 Casiotone",
             "description": "400x tones, 77x rhythms and an on-board Dance Music Mode.",
             "price": 322.71,
             "discount": 0,
@@ -496,7 +496,7 @@
         },
         {
             "id": "KEY0005421-000",
-            "name": "Medeli AKX10 61-Note Digital Arranger Workstation (Black)",
+            "name": "Medeli AKX10",
             "description": "The Keybaord offers a selection of over 1150 sounds and 280 rhythms.",
             "price": 1464.89,
             "discount": 0,
@@ -510,7 +510,7 @@
     "synthesizers": [
         {
             "id": "SYN0008141-000",
-            "name": "AKAI Professional MPK Mini Play Mk3",
+            "name": "AKAI Professional MPK",
             "description": "USB DAW controller, over 100 sounds, up to 16 MPC style pads;",
             "price": 234.70,
             "discount": 0,
@@ -570,7 +570,7 @@
         },
         {
             "id": "SYN0008173-000",
-            "name": "Modal Electronics Cobalt5S",
+            "name": "ME Cobalt5S",
             "description": "A five-voice virtual analog synthesizer with a 37-key keyboard.",
             "price": 865.830,
             "discount": 0,
@@ -606,7 +606,7 @@
         },
         {
             "id": "SYN0007243-000",
-            "name": "ASM Hydrasynth Keyboard",
+            "name": "ASM Hydrasynth",
             "description": "An 8-Voice Digital Keyboard Synthesizer with Wave Morphing synthesis.",
             "price": 2540.58,
             "discount": 0.10,
@@ -630,7 +630,7 @@
         },
         {
             "id": "SYN0008680-000",
-            "name": "UDO Audio Super 6 White Special Edition",
+            "name": "UDO Audio Super 6",
             "description": "A 12-voice polyphonic digital-analog hybrid synthesizer.",
             "price": 4731.47,
             "discount": 0,
@@ -642,7 +642,7 @@
         },
         {
             "id": "SYN0007410-000",
-            "name": "Korg i3 Workstation (Black)",
+            "name": "Korg i3 Workstation",
             "description": "790x Sounds, 270x Styles, 59x Drum Kits, Back-Lit LCD Screen;",
             "price": 1171.52,
             "discount": 0.15,
@@ -654,7 +654,7 @@
         },
         {
             "id": "SYN0007359-000",
-            "name": "Modal Electronics Argon8X Wavetable Synthesizer",
+            "name": "ME Argon8X",
             "description": "A Polyphonic Wavetable Synthesizer with 8-Voices and a comprehensive Synthesis tool-kit.",
             "price": 1313.52,
             "discount": 0,
@@ -690,7 +690,7 @@
         },
         {
             "id": "SYN0004732-000",
-            "name": "Studiologic Sledge 2.0 Synthesizer",
+            "name": "Studiologic Sledge 2.0",
             "description": "New features, sound innovations, new mix of pure synthesis, sound sampling;",
             "price": 1727.75,
             "discount": 0,

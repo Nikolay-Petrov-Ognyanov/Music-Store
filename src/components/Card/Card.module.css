@@ -49,6 +49,9 @@
 
 .description {
     font-size: 1.25vw;
+    height: 6vw;
+    display: flex;
+    align-items: center;
 }
 
 .price {
@@ -91,7 +94,7 @@
     color: white;
     font-size: 1.5vw;
     padding: 0 1vw;
-    border-radius: 1vw;
+    border-radius: 0.5vw;
     width: 100%;
     border: 0.125vw solid;
 }

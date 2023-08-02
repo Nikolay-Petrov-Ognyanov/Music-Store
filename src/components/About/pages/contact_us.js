@@ -1,4 +1,4 @@
-import style from "./About.module.css"
+import style from "../About.module.css"
 
 const contact_us = <section className={style.section}>
 	<h1 className={style.h1}>Contact Us</h1>

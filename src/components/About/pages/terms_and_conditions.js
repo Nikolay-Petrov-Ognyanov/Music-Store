@@ -1,4 +1,4 @@
-import style from "./About.module.css"
+import style from "../About.module.css"
 
 const terms_and_conditions = <section className={style.section}>
         <h1 className={style.h1}>Terms and Conditions</h1>

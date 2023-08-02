@@ -11,7 +11,7 @@ export default function Card({ item }) {
         <div className={style.image_container}>
             <img
                 src={item.image} alt={item.name}
-                className={item.name === "SPIX 96" && style.spix_96}
+                className={item.name === "SPIX 96" ? style.spix_96 : ""}
             />
         </div>
 
