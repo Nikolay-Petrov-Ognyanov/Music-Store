@@ -8,20 +8,20 @@ export default function Catalog() {
 
     const navigate = useNavigate()
 
-    const [data, setData] = useState(null)
+    const [instruments, setInstruments] = useState(null)
     const [showDropdownMenu, setShowDropdownMenu] = useState(false)
     const [sortingCriteria, setSortingCriteria] = useState("Alphabetical A-Z")
+    const [manufacturers, setManufacturers] = useState([])
+    const [numbersOfKeys, setNumberOfKeys] = useState([])
 
-    const sortingCriteriaVarians = [
+    const KEYS = category && category === "accordions" ? "Basses" : "Keys"
+
+    const sortingCriteriaVariants = [
         "Alphabetical A-Z",
         "Alphabetical Z-A",
         "Price ascending",
         "Price descending"
     ]
-
-    useEffect(() => {
-        console.log(sortingCriteria && sortingCriteria)
-    }, [sortingCriteria])
 
     useEffect(() => {
         if (!category) navigate("/catalog/accordions")
@@ -30,8 +30,27 @@ export default function Catalog() {
             try {
                 const response = await fetch("/database.json")
                 const data = await response.json()
+                const instrumentsFromServer = data[category || "accordions"]
+                const uniqueManufacturers = new Set()
+                const uniqueNumbersOfKeys = new Set()
 
-                setData(data[category || "accordions"])
+                instrumentsFromServer.forEach(instrument => {
+                    uniqueManufacturers.add(instrument.manufacturer)
+
+                    if (instrument.keys > 0) {
+                        uniqueNumbersOfKeys.add(instrument.keys)
+                    } else if (instrument.basses > 0) {
+                        uniqueNumbersOfKeys.add(instrument.basses)
+                    }
+                })
+
+                setInstruments(instrumentsFromServer)
+                
+                setManufacturers(Array.from(uniqueManufacturers).sort(
+                    (a, b) => a.localeCompare(b)
+                ))
+
+                setNumberOfKeys(Array.from(uniqueNumbersOfKeys).sort((a, b) => a - b))
             } catch (error) {
                 console.error(error)
             }
@@ -43,7 +62,7 @@ export default function Catalog() {
     return <section className={style.catalog}>
         <div className={style.top}>
             <div className={style.sorting_container} >
-                <label htmlFor="sort_by">Sort by:</label>
+                <span>Sort by:</span>
 
                 <div
                     className={style.select_container}
@@ -61,7 +80,7 @@ export default function Catalog() {
                             style.ul_show
                         ) : style.ul_hide}
                     >
-                        {(sortingCriteriaVarians.filter(criteria => (
+                        {(sortingCriteriaVariants.filter(criteria => (
                             criteria !== sortingCriteria
                         )).map((criteria, index) => (
                             <li
@@ -87,12 +106,44 @@ export default function Catalog() {
 
         <div className={style.bottom}>
             <aside className={style.left}>
-                Filter by:
+                <p>Filter by:</p>
+
+                <div className={style.filter_container}>
+                    <p>Manufacturer</p>
+
+                    <div className={style.filtering_criteria_container}>
+                        {manufacturers.map((manufacturer, index) => (
+                            <div key={index}>
+                                <input type="checkbox" className={style.checkbox} />
+
+                                <span className={style.filtering_criteria_span}>
+                                    {manufacturer}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className={style.filter_container}>
+                    <p>{KEYS}</p>
+
+                    <div className={style.filtering_criteria_container}>
+                        {numbersOfKeys.map((numberOfKeys, index) => (
+                            <div key={index}>
+                                <input type="checkbox" className={style.checkbox} />
+
+                                <span className={style.filtering_criteria_span}>
+                                    {numberOfKeys}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </aside>
 
             <div className={style.right}>
                 <div className={style.cards}>
-                    {data && data.map(item => (
+                    {instruments && instruments.map(item => (
                         <Card key={item.id} item={item} />
                     ))}
                 </div>

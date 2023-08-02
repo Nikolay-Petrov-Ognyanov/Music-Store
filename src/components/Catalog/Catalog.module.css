@@ -10,6 +10,10 @@
     font-size: 2vw;
 }
 
+.filter_container {
+    margin-top: 2vw;
+}
+
 .right {
     width: 71.75vw;
     margin: 0 0 0 1vw;
