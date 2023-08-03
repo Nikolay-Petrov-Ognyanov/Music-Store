@@ -2,6 +2,9 @@ import style from "./Catalog.module.css"
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Card from "../Card/Card"
+import Slider from "rc-slider"
+import "rc-slider/assets/index.css"
+
 
 export default function Catalog() {
     const { category } = useParams()
@@ -11,8 +14,16 @@ export default function Catalog() {
     const [instruments, setInstruments] = useState(null)
     const [showDropdownMenu, setShowDropdownMenu] = useState(false)
     const [sortingCriteria, setSortingCriteria] = useState("Alphabetical A-Z")
+
+    const [lowestPrice, setLowestPrice] = useState(0)
+    const [highestPrice, setHighestPrice] = useState(0)
+    const [priceRange, setPriceRange] = useState([0, 0])
+
     const [manufacturers, setManufacturers] = useState([])
-    const [numbersOfKeys, setNumberOfKeys] = useState([])
+    const [numbersOfKeys, setNumbersOfKeys] = useState([])
+
+    const [fromManufacturer, setFromManufacturer] = useState({})
+    const [withNumberOfKeys, setWithNumberOfKeys] = useState({})
 
     const KEYS = category && category === "accordions" ? "Basses" : "Keys"
 
@@ -30,11 +41,54 @@ export default function Catalog() {
             try {
                 const response = await fetch("/database.json")
                 const data = await response.json()
+
                 const instrumentsFromServer = data[category || "accordions"]
+
+                let lowestInstrumentPrice = 0
+                let highestInstrumentPrice = 0
+
+                instrumentsFromServer.forEach(instrument => {
+                    const price = instrument.price * (1 - instrument.discount)
+
+                    if (lowestInstrumentPrice === 0) lowestInstrumentPrice = price
+                    if (highestInstrumentPrice === 0) highestInstrumentPrice = price
+                    if (price < lowestInstrumentPrice) lowestInstrumentPrice = price
+                    if (price > highestInstrumentPrice) highestInstrumentPrice = price
+                })
+
+                setLowestPrice(lowestInstrumentPrice)
+                setHighestPrice(highestInstrumentPrice)
+                setPriceRange([lowestInstrumentPrice, highestInstrumentPrice])
+
                 const uniqueManufacturers = new Set()
                 const uniqueNumbersOfKeys = new Set()
 
+                const manufacturerCounts = {}
+                const numberOfKeysCounts = {}
+
                 instrumentsFromServer.forEach(instrument => {
+                    const manufacturer = instrument.manufacturer
+
+                    const numberOfKeys = instrument.keys > 0 ? (
+                        instrument.keys
+                    ) : instrument.basses
+
+                    if (!manufacturerCounts[manufacturer]) {
+                        manufacturerCounts[manufacturer] = 0
+                    }
+
+                    manufacturerCounts[manufacturer]++
+
+                    setFromManufacturer(manufacturerCounts)
+
+                    if (!numberOfKeysCounts[numberOfKeys]) {
+                        numberOfKeysCounts[numberOfKeys] = 0
+                    }
+
+                    numberOfKeysCounts[numberOfKeys]++
+
+                    setWithNumberOfKeys(numberOfKeysCounts)
+
                     uniqueManufacturers.add(instrument.manufacturer)
 
                     if (instrument.keys > 0) {
@@ -44,13 +98,13 @@ export default function Catalog() {
                     }
                 })
 
-                setInstruments(instrumentsFromServer)
-                
                 setManufacturers(Array.from(uniqueManufacturers).sort(
                     (a, b) => a.localeCompare(b)
                 ))
 
-                setNumberOfKeys(Array.from(uniqueNumbersOfKeys).sort((a, b) => a - b))
+                setNumbersOfKeys(Array.from(uniqueNumbersOfKeys).sort((a, b) => a - b))
+
+                setInstruments(instrumentsFromServer)
             } catch (error) {
                 console.error(error)
             }
@@ -106,39 +160,68 @@ export default function Catalog() {
 
         <div className={style.bottom}>
             <aside className={style.left}>
-                <p>Filter by:</p>
+                <div className={style.filter_container}>
+                    <h2 className={style.h2}>Price</h2>
+
+                    <Slider
+                        min={lowestPrice}
+                        max={highestPrice}
+                        value={priceRange}
+                        onChange={(values) => setPriceRange(values)}
+                        range
+                    />
+
+                    <p className={style.price_range} >
+                        <span>{Math.floor(priceRange[0])}</span>
+                        <span>{Math.ceil(priceRange[1])}</span>
+                    </p>
+                </div>
 
                 <div className={style.filter_container}>
-                    <p>Manufacturer</p>
+                    <h2 className={style.h2}>Manufacturer</h2>
 
                     <div className={style.filtering_criteria_container}>
                         {manufacturers.map((manufacturer, index) => (
-                            <div key={index}>
-                                <input type="checkbox" className={style.checkbox} />
+                            <label
+                                key={index}
+                                className={style.filtering_criteria}
+                            >
+                                <input
+                                    type="checkbox"
+                                    className={style.checkbox}
+                                />
 
                                 <span className={style.filtering_criteria_span}>
-                                    {manufacturer}
+                                    {manufacturer} ({fromManufacturer[manufacturer]})
                                 </span>
-                            </div>
+                            </label>
                         ))}
                     </div>
                 </div>
 
                 <div className={style.filter_container}>
-                    <p>{KEYS}</p>
+                    <h2 className={style.h2}>{KEYS}</h2>
 
                     <div className={style.filtering_criteria_container}>
                         {numbersOfKeys.map((numberOfKeys, index) => (
-                            <div key={index}>
-                                <input type="checkbox" className={style.checkbox} />
+                            <label
+                                key={index}
+                                className={style.filtering_criteria}
+                            >
+                                <input
+                                    type="checkbox"
+                                    className={style.checkbox}
+                                />
 
                                 <span className={style.filtering_criteria_span}>
-                                    {numberOfKeys}
+                                    {numberOfKeys} ({withNumberOfKeys[numberOfKeys]})
                                 </span>
-                            </div>
+                            </label>
                         ))}
                     </div>
                 </div>
+
+                <button className={style.clear_all_filters}>Clear all filters</button>
             </aside>
 
             <div className={style.right}>
@@ -149,5 +232,5 @@ export default function Catalog() {
                 </div>
             </div>
         </div>
-    </section >
+    </section>
 }
