@@ -85,41 +85,20 @@ export default function Catalog() {
         })
 
         const uniqueManufacturers = new Set()
-        const uniqueNumbersOfKeys = new Set()
-
         const manufacturerCounts = {}
-        const numberOfKeysCounts = {}
 
         filtered_by_price && filtered_by_price.forEach(instrument => {
             const manufacturer = instrument.manufacturer
-
-            const numberOfKeys = instrument.keys > 0 ? (
-                instrument.keys
-            ) : instrument.basses
 
             if (!manufacturerCounts[manufacturer]) {
                 manufacturerCounts[manufacturer] = 0
             }
 
             manufacturerCounts[manufacturer]++
-
-            if (!numberOfKeysCounts[numberOfKeys]) {
-                numberOfKeysCounts[numberOfKeys] = 0
-            }
-
-            numberOfKeysCounts[numberOfKeys]++
-
             uniqueManufacturers.add(instrument.manufacturer)
-
-            if (instrument.keys > 0) {
-                uniqueNumbersOfKeys.add(instrument.keys)
-            } else if (instrument.basses > 0) {
-                uniqueNumbersOfKeys.add(instrument.basses)
-            }
         })
 
         setFromManufacturer(manufacturerCounts)
-        setWithNumberOfKeys(numberOfKeysCounts)
 
         const sortedManufacturers = Array.from(uniqueManufacturers).sort(
             (a, b) => a.localeCompare(b)
@@ -132,6 +111,51 @@ export default function Catalog() {
         sortedManufacturers.forEach(m => manufacturersObject[m] = false)
 
         setSelectedManufacturers(manufacturersObject)
+        setFilteredByPrice(filtered_by_price)
+    }, [priceRange, instruments])
+
+    useEffect(() => {
+        const filtered_by_manufacturer = (
+            filteredByPrice && filteredByPrice.filter(instrument => {
+                if (selectedManufacturers[instrument.manufacturer]) {
+                    return instrument
+                } else return null
+            })
+        )
+
+        const filtered = (
+            (filtered_by_manufacturer
+                && filtered_by_manufacturer.length > 0
+                && filtered_by_manufacturer
+            ) || (
+                filteredByPrice
+                && filteredByPrice.length > 0
+                && filteredByPrice
+            )
+        )
+
+        const uniqueNumbersOfKeys = new Set()
+        const numberOfKeysCounts = {}
+
+        filtered && filtered.forEach(instrument => {
+            const numberOfKeys = instrument.keys > 0 ? (
+                instrument.keys
+            ) : instrument.basses
+
+            if (!numberOfKeysCounts[numberOfKeys]) {
+                numberOfKeysCounts[numberOfKeys] = 0
+            }
+
+            numberOfKeysCounts[numberOfKeys]++
+
+            if (instrument.keys > 0) {
+                uniqueNumbersOfKeys.add(instrument.keys)
+            } else if (instrument.basses > 0) {
+                uniqueNumbersOfKeys.add(instrument.basses)
+            }
+        })
+
+        setWithNumberOfKeys(numberOfKeysCounts)
 
         const sortedNumbersOfKeys = Array.from(uniqueNumbersOfKeys).sort(
             (a, b) => a - b
@@ -145,20 +169,8 @@ export default function Catalog() {
 
         setSelectedNumbersOfKeys(numbersOfKeysObject)
 
-        setFilteredByPrice(filtered_by_price)
-    }, [priceRange, instruments])
-
-    useEffect(() => {
-        const filtered_by_manufacturer = (
-            filteredByPrice && filteredByPrice.filter(instrument => {
-                if (selectedManufacturers[instrument.manufacturer]) {
-                    return instrument
-                } else return null
-            })
-        )
-
         if (Object.values(selectedManufacturers).some(v => v)) {
-            setFilteredByManufacturer(filtered_by_manufacturer)
+            setFilteredByManufacturer(filtered)
         } else {
             setFilteredByManufacturer(filteredByPrice)
         }
@@ -317,7 +329,7 @@ export default function Catalog() {
                                     type="checkbox"
                                     className={style.checkbox}
 
-                                    checked={selectedNumbersOfKeys[numbersOfKeys]}
+                                    checked={selectedNumbersOfKeys[numberOfKeys]}
 
                                     onChange={event => {
                                         handleNumberOfKeysCheckboxChange(
