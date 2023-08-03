@@ -12,6 +12,8 @@ export default function Catalog() {
     const navigate = useNavigate()
 
     const [instruments, setInstruments] = useState(null)
+    const [filteredInstruments, setFilteredInstruments] = useState([])
+
     const [showDropdownMenu, setShowDropdownMenu] = useState(false)
     const [sortingCriteria, setSortingCriteria] = useState("Alphabetical A-Z")
 
@@ -59,51 +61,6 @@ export default function Catalog() {
                 setLowestPrice(lowestInstrumentPrice)
                 setHighestPrice(highestInstrumentPrice)
                 setPriceRange([lowestInstrumentPrice, highestInstrumentPrice])
-
-                const uniqueManufacturers = new Set()
-                const uniqueNumbersOfKeys = new Set()
-
-                const manufacturerCounts = {}
-                const numberOfKeysCounts = {}
-
-                instrumentsFromServer.forEach(instrument => {
-                    const manufacturer = instrument.manufacturer
-
-                    const numberOfKeys = instrument.keys > 0 ? (
-                        instrument.keys
-                    ) : instrument.basses
-
-                    if (!manufacturerCounts[manufacturer]) {
-                        manufacturerCounts[manufacturer] = 0
-                    }
-
-                    manufacturerCounts[manufacturer]++
-
-                    setFromManufacturer(manufacturerCounts)
-
-                    if (!numberOfKeysCounts[numberOfKeys]) {
-                        numberOfKeysCounts[numberOfKeys] = 0
-                    }
-
-                    numberOfKeysCounts[numberOfKeys]++
-
-                    setWithNumberOfKeys(numberOfKeysCounts)
-
-                    uniqueManufacturers.add(instrument.manufacturer)
-
-                    if (instrument.keys > 0) {
-                        uniqueNumbersOfKeys.add(instrument.keys)
-                    } else if (instrument.basses > 0) {
-                        uniqueNumbersOfKeys.add(instrument.basses)
-                    }
-                })
-
-                setManufacturers(Array.from(uniqueManufacturers).sort(
-                    (a, b) => a.localeCompare(b)
-                ))
-
-                setNumbersOfKeys(Array.from(uniqueNumbersOfKeys).sort((a, b) => a - b))
-
                 setInstruments(instrumentsFromServer)
             } catch (error) {
                 console.error(error)
@@ -112,6 +69,62 @@ export default function Catalog() {
 
         fetchData()
     }, [category, navigate])
+
+    useEffect(() => {
+        const filteredByPrice = instruments && instruments.filter(instrument => {
+            const price = instrument.price * (1 - instrument.discount)
+
+            if (price >= priceRange[0] && price <= priceRange[1]) {
+                return instrument
+            }
+        })
+
+        const uniqueManufacturers = new Set()
+        const uniqueNumbersOfKeys = new Set()
+
+        const manufacturerCounts = {}
+        const numberOfKeysCounts = {}
+
+        filteredByPrice.forEach(instrument => {
+            const manufacturer = instrument.manufacturer
+
+            const numberOfKeys = instrument.keys > 0 ? (
+                instrument.keys
+            ) : instrument.basses
+
+            if (!manufacturerCounts[manufacturer]) {
+                manufacturerCounts[manufacturer] = 0
+            }
+
+            manufacturerCounts[manufacturer]++
+
+            setFromManufacturer(manufacturerCounts)
+
+            if (!numberOfKeysCounts[numberOfKeys]) {
+                numberOfKeysCounts[numberOfKeys] = 0
+            }
+
+            numberOfKeysCounts[numberOfKeys]++
+
+            setWithNumberOfKeys(numberOfKeysCounts)
+
+            uniqueManufacturers.add(instrument.manufacturer)
+
+            if (instrument.keys > 0) {
+                uniqueNumbersOfKeys.add(instrument.keys)
+            } else if (instrument.basses > 0) {
+                uniqueNumbersOfKeys.add(instrument.basses)
+            }
+        })
+
+        setManufacturers(Array.from(uniqueManufacturers).sort(
+            (a, b) => a.localeCompare(b)
+        ))
+
+        setNumbersOfKeys(Array.from(uniqueNumbersOfKeys).sort((a, b) => a - b))
+
+        setFilteredInstruments(filteredByPrice)
+    }, [priceRange, instruments])
 
     return <section className={style.catalog}>
         <div className={style.top}>
@@ -226,7 +239,7 @@ export default function Catalog() {
 
             <div className={style.right}>
                 <div className={style.cards}>
-                    {instruments && instruments.map(item => (
+                    {filteredInstruments && filteredInstruments.map(item => (
                         <Card key={item.id} item={item} />
                     ))}
                 </div>
