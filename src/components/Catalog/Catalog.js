@@ -12,7 +12,10 @@ export default function Catalog() {
     const navigate = useNavigate()
 
     const [instruments, setInstruments] = useState(null)
-    const [filteredInstruments, setFilteredInstruments] = useState([])
+
+    const [filteredByPrice, setFilteredByPrice] = useState([])
+    const [filteredByManufacturer, setFilteredByManufacturer] = useState([])
+    const [filteredByNumberOfKeys, setFilteredByNumberOfKeys] = useState([])
 
     const [showDropdownMenu, setShowDropdownMenu] = useState(false)
     const [sortingCriteria, setSortingCriteria] = useState("Alphabetical A-Z")
@@ -26,6 +29,9 @@ export default function Catalog() {
 
     const [fromManufacturer, setFromManufacturer] = useState({})
     const [withNumberOfKeys, setWithNumberOfKeys] = useState({})
+
+    const [selectedManufacturers, setSelectedManufacturers] = useState({})
+    const [selectedNumbersOfKeys, setSelectedNumbersOfKeys] = useState({})
 
     const KEYS = category && category === "accordions" ? "Basses" : "Keys"
 
@@ -43,7 +49,6 @@ export default function Catalog() {
             try {
                 const response = await fetch("/database.json")
                 const data = await response.json()
-
                 const instrumentsFromServer = data[category || "accordions"]
 
                 let lowestInstrumentPrice = 0
@@ -71,12 +76,12 @@ export default function Catalog() {
     }, [category, navigate])
 
     useEffect(() => {
-        const filteredByPrice = instruments && instruments.filter(instrument => {
+        const filtered_by_price = instruments && instruments.filter(instrument => {
             const price = instrument.price * (1 - instrument.discount)
 
             if (price >= priceRange[0] && price <= priceRange[1]) {
                 return instrument
-            }
+            } else return null
         })
 
         const uniqueManufacturers = new Set()
@@ -85,7 +90,7 @@ export default function Catalog() {
         const manufacturerCounts = {}
         const numberOfKeysCounts = {}
 
-        filteredByPrice.forEach(instrument => {
+        filtered_by_price && filtered_by_price.forEach(instrument => {
             const manufacturer = instrument.manufacturer
 
             const numberOfKeys = instrument.keys > 0 ? (
@@ -98,15 +103,11 @@ export default function Catalog() {
 
             manufacturerCounts[manufacturer]++
 
-            setFromManufacturer(manufacturerCounts)
-
             if (!numberOfKeysCounts[numberOfKeys]) {
                 numberOfKeysCounts[numberOfKeys] = 0
             }
 
             numberOfKeysCounts[numberOfKeys]++
-
-            setWithNumberOfKeys(numberOfKeysCounts)
 
             uniqueManufacturers.add(instrument.manufacturer)
 
@@ -117,14 +118,97 @@ export default function Catalog() {
             }
         })
 
-        setManufacturers(Array.from(uniqueManufacturers).sort(
+        setFromManufacturer(manufacturerCounts)
+        setWithNumberOfKeys(numberOfKeysCounts)
+
+        const sortedManufacturers = Array.from(uniqueManufacturers).sort(
             (a, b) => a.localeCompare(b)
-        ))
+        )
 
-        setNumbersOfKeys(Array.from(uniqueNumbersOfKeys).sort((a, b) => a - b))
+        setManufacturers(sortedManufacturers)
 
-        setFilteredInstruments(filteredByPrice)
+        const manufacturersObject = {}
+
+        sortedManufacturers.forEach(m => manufacturersObject[m] = false)
+
+        setSelectedManufacturers(manufacturersObject)
+
+        const sortedNumbersOfKeys = Array.from(uniqueNumbersOfKeys).sort(
+            (a, b) => a - b
+        )
+
+        setNumbersOfKeys(sortedNumbersOfKeys)
+
+        const numbersOfKeysObject = {}
+
+        sortedNumbersOfKeys.forEach(n => numbersOfKeysObject[n] = false)
+
+        setSelectedNumbersOfKeys(numbersOfKeysObject)
+
+        setFilteredByPrice(filtered_by_price)
     }, [priceRange, instruments])
+
+    useEffect(() => {
+        const filtered_by_manufacturer = (
+            filteredByPrice && filteredByPrice.filter(instrument => {
+                if (selectedManufacturers[instrument.manufacturer]) {
+                    return instrument
+                } else return null
+            })
+        )
+
+        if (Object.values(selectedManufacturers).some(v => v)) {
+            setFilteredByManufacturer(filtered_by_manufacturer)
+        } else {
+            setFilteredByManufacturer(filteredByPrice)
+        }
+    }, [filteredByPrice, selectedManufacturers])
+
+    useEffect(() => {
+        const previouslyFiltered = (
+            (filteredByManufacturer
+                && filteredByManufacturer.length > 0
+                && filteredByManufacturer
+            ) || (filteredByPrice
+                && filteredByPrice.length > 0
+                && filteredByPrice
+            )
+        )
+
+        const filtered_by_number_of_keys = (
+            previouslyFiltered && previouslyFiltered.filter(instrument => {
+                const instrumentNumberOfKeys = instrument.basses || instrument.keys
+
+                if (selectedNumbersOfKeys[instrumentNumberOfKeys]) {
+                    return instrument
+                } else return null
+            })
+        )
+
+        if (Object.values(selectedNumbersOfKeys).some(v => v)) {
+            setFilteredByNumberOfKeys(filtered_by_number_of_keys)
+        } else {
+            setFilteredByNumberOfKeys(previouslyFiltered)
+        }
+    }, [filteredByPrice, filteredByManufacturer, selectedNumbersOfKeys])
+
+    function handleManufacturerCheckboxChange(event, manufacturer) {
+        const isChecked = event.target.checked
+
+        setSelectedManufacturers(state => ({
+            ...state,
+            [manufacturer]: isChecked
+        }))
+    }
+
+    function handleNumberOfKeysCheckboxChange(event, numberOfKeys) {
+        const isChecked = event.target.checked
+
+        setSelectedNumbersOfKeys(state => ({
+            ...state,
+            [numberOfKeys]: isChecked
+        }))
+    }
 
     return <section className={style.catalog}>
         <div className={style.top}>
@@ -202,6 +286,14 @@ export default function Catalog() {
                                 <input
                                     type="checkbox"
                                     className={style.checkbox}
+
+                                    checked={selectedManufacturers[manufacturer]}
+
+                                    onChange={event => {
+                                        handleManufacturerCheckboxChange(
+                                            event, manufacturer
+                                        )
+                                    }}
                                 />
 
                                 <span className={style.filtering_criteria_span}>
@@ -224,6 +316,14 @@ export default function Catalog() {
                                 <input
                                     type="checkbox"
                                     className={style.checkbox}
+
+                                    checked={selectedNumbersOfKeys[numbersOfKeys]}
+
+                                    onChange={event => {
+                                        handleNumberOfKeysCheckboxChange(
+                                            event, numberOfKeys
+                                        )
+                                    }}
                                 />
 
                                 <span className={style.filtering_criteria_span}>
@@ -239,7 +339,7 @@ export default function Catalog() {
 
             <div className={style.right}>
                 <div className={style.cards}>
-                    {filteredInstruments && filteredInstruments.map(item => (
+                    {filteredByNumberOfKeys && filteredByNumberOfKeys.map(item => (
                         <Card key={item.id} item={item} />
                     ))}
                 </div>
