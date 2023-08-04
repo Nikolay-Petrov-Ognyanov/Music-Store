@@ -4,15 +4,34 @@ import Footer from "./components/Footer/Footer"
 import Header from "./components/Header/Header"
 import Catalog from "./components/Catalog/Catalog"
 import About from "./components/About/About"
+import { useEffect, useState } from "react"
 
 export default function App() {
+
+
+
+
 	return <div className="App">
 		<Header />
 
 		<main> <Routes>
-			<Route path="/catalog/:category" element={<Catalog />} />
-			<Route path="/about/:page" element={<About />} />
-			<Route path="*" element={<Catalog />} />
+			<Route
+				path="/catalog/:category"
+				element={<Catalog />}
+				viewportWidth={visualViewport}
+			/>
+
+			<Route
+				path="/about/:page"
+				element={<About />}
+				viewportWidth={visualViewport}
+			/>
+
+			<Route
+				path="*"
+				element={<Catalog />}
+				viewportWidth={visualViewport}
+			/>
 		</Routes> </main>
 
 		<Footer />
