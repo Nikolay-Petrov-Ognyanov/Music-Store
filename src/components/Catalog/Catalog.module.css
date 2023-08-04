@@ -42,21 +42,6 @@
     
 }
 
-.clear_all_filters {
-    color: white;
-    font-size: 2vw;
-    margin: 1vw;
-    border-radius: 2vw;
-    border: 0.25vw solid;
-    cursor: pointer;
-}
-
-.clear_all_filters:hover {
-    color: black;
-    border-color: white;
-    background-color: white;
-}
-
 .right {
     width: 71.75vw;
     margin: 0 0 0 1vw;

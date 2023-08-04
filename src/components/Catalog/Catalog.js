@@ -33,8 +33,8 @@ export default function Catalog() {
 	const [fromManufacturer, setFromManufacturer] = useState({})
 	const [withNumberOfKeys, setWithNumberOfKeys] = useState({})
 
-	const [selectedManufacturers, setSelectedManufacturers] = useState({})
-	const [selectedNumbersOfKeys, setSelectedNumbersOfKeys] = useState({})
+	const [selectedManufacturers, setSelectedManufacturers] = useState([])
+	const [selectedNumbersOfKeys, setSelectedNumbersOfKeys] = useState([])
 
 	const KEYS = category && category === "accordions" ? "Basses" : "Keys"
 
@@ -109,20 +109,17 @@ export default function Catalog() {
 
 		setManufacturers(sortedManufacturers)
 
-		const manufacturersObject = {}
-
-		sortedManufacturers.forEach(m => manufacturersObject[m] = false)
-
-		setSelectedManufacturers(manufacturersObject)
 		setFilteredByPrice(filtered_by_price)
 	}, [priceRange, instruments])
 
 	useEffect(() => {
 		const filtered_by_manufacturer = (
 			filteredByPrice && filteredByPrice.filter(instrument => {
-				if (selectedManufacturers[instrument.manufacturer]) {
+				if (selectedManufacturers.includes(instrument.manufacturer)) {
 					return instrument
-				} else return null
+				} else {
+					return null
+				}
 			})
 		)
 
@@ -166,12 +163,6 @@ export default function Catalog() {
 
 		setNumbersOfKeys(sortedNumbersOfKeys)
 
-		const numbersOfKeysObject = {}
-
-		sortedNumbersOfKeys.forEach(n => numbersOfKeysObject[n] = false)
-
-		setSelectedNumbersOfKeys(numbersOfKeysObject)
-
 		if (Object.values(selectedManufacturers).some(v => v)) {
 			setFilteredByManufacturer(filtered)
 		} else {
@@ -194,9 +185,11 @@ export default function Catalog() {
 			previouslyFiltered && previouslyFiltered.filter(instrument => {
 				const instrumentNumberOfKeys = instrument.basses || instrument.keys
 
-				if (selectedNumbersOfKeys[instrumentNumberOfKeys]) {
+				if (selectedNumbersOfKeys.includes(instrumentNumberOfKeys)) {
 					return instrument
-				} else return null
+				} else {
+					return null
+				}
 			})
 		)
 
@@ -245,22 +238,24 @@ export default function Catalog() {
 		handleSorting(sortingCriteria)
 	}, [filteredByNumberOfKeys, handleSorting, sortingCriteria])
 
-	function handleManufacturerCheckboxChange(event, manufacturer) {
-		const isChecked = event.target.checked
-
-		setSelectedManufacturers(state => ({
-			...state,
-			[manufacturer]: isChecked
-		}))
+	function handleManufacturerCheckboxChange(manufacturer) {
+		setSelectedManufacturers(previouslySelected => {
+			if (previouslySelected.includes(manufacturer)) {
+				return previouslySelected.filter(m => m !== manufacturer)
+			} else {
+				return [...previouslySelected, manufacturer]
+			}
+		})
 	}
 
-	function handleNumberOfKeysCheckboxChange(event, numberOfKeys) {
-		const isChecked = event.target.checked
-
-		setSelectedNumbersOfKeys(state => ({
-			...state,
-			[numberOfKeys]: isChecked
-		}))
+	function handleNumberOfKeysCheckboxChange(numberofKeys) {
+		setSelectedNumbersOfKeys(previouslySelected => {
+			if (previouslySelected.includes(numberofKeys)) {
+				return previouslySelected.filter(n => n !== numberofKeys)
+			} else {
+				return [...previouslySelected, numberofKeys]
+			}
+		})
 	}
 
 	return <section className={style.catalog}>
@@ -340,11 +335,11 @@ export default function Catalog() {
 								<input
 									type="checkbox"
 									className={style.checkbox}
-									checked={selectedManufacturers[manufacturer]}
+									checked={selectedManufacturers.includes(manufacturer)}
 
-									onChange={event => {
+									onChange={() => {
 										handleManufacturerCheckboxChange(
-											event, manufacturer
+											manufacturer
 										)
 									}}
 								/>
@@ -369,13 +364,11 @@ export default function Catalog() {
 								<input
 									type="checkbox"
 									className={style.checkbox}
-									checked={selectedNumbersOfKeys[numberOfKeys]}
+									checked={selectedNumbersOfKeys.includes(numberOfKeys)}
 
-									onChange={event => {
-										handleNumberOfKeysCheckboxChange(
-											event, numberOfKeys
-										)
-									}}
+									onChange={() => handleNumberOfKeysCheckboxChange(
+										numberOfKeys
+									)}
 								/>
 
 								<span className={style.filtering_criteria_span}>
@@ -385,8 +378,6 @@ export default function Catalog() {
 						))}
 					</div>
 				</div>
-
-				<button className={style.clear_all_filters}>Clear all filters</button>
 			</aside>
 
 			<div className={style.right}>
