@@ -1,5 +1,5 @@
 import style from "./Catalog.module.css"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Card from "../Card/Card"
 import Slider from "rc-slider"
@@ -203,11 +203,7 @@ export default function Catalog() {
 		}
 	}, [filteredByPrice, filteredByManufacturer, selectedNumbersOfKeys])
 
-	useEffect(() => {
-		handleSorting(sortingCriteria)
-	}, [sortingCriteria, filteredByNumberOfKeys])
-
-	function handleSorting(criteria) {
+	const handleSorting = useCallback((criteria) => {
 		if (filteredByNumberOfKeys) {
 			if (criteria === "Alphabetical A-Z") {
 				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
@@ -239,7 +235,11 @@ export default function Catalog() {
 				}))
 			}
 		}
-	}
+	}, [filteredByNumberOfKeys])
+
+	useEffect(() => {
+		handleSorting(sortingCriteria)
+	}, [sortingCriteria, filteredByNumberOfKeys, handleSorting, sortedInstruments])
 
 	function handleManufacturerCheckboxChange(event, manufacturer) {
 		const isChecked = event.target.checked
@@ -289,6 +289,7 @@ export default function Catalog() {
 
 								onClick={() => {
 									setSortingCriteria(criteria)
+									handleSorting(criteria)
 									setShowDropdownMenu(false)
 								}}
 							>
@@ -300,7 +301,7 @@ export default function Catalog() {
 			</div>
 
 			<span className={style.items_counter}>
-				Showing X products out of Y
+				Showing X products out of {sortedInstruments.length}
 			</span>
 		</div>
 
@@ -335,7 +336,6 @@ export default function Catalog() {
 								<input
 									type="checkbox"
 									className={style.checkbox}
-
 									checked={selectedManufacturers[manufacturer]}
 
 									onChange={event => {
@@ -365,7 +365,6 @@ export default function Catalog() {
 								<input
 									type="checkbox"
 									className={style.checkbox}
-
 									checked={selectedNumbersOfKeys[numberOfKeys]}
 
 									onChange={event => {
