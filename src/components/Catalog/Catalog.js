@@ -76,6 +76,7 @@ export default function Catalog() {
 		}
 
 		fetchData()
+		clearAllFilters()
 	}, [category, navigate])
 
 	useEffect(() => {
@@ -258,6 +259,12 @@ export default function Catalog() {
 		})
 	}
 
+	function clearAllFilters() {
+		setPriceRange([lowestPrice, highestPrice])
+		setSelectedManufacturers([])
+		setSelectedNumbersOfKeys([])
+	}
+
 	return <section className={style.catalog}>
 		<div className={style.top}>
 			<div className={style.sorting_container} >
@@ -378,6 +385,13 @@ export default function Catalog() {
 						))}
 					</div>
 				</div>
+
+				<button
+					onClick={clearAllFilters}
+					className={style.clear_all_filters}
+				>
+					Clear all filters
+				</button>
 			</aside>
 
 			<div className={style.right}>
