@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
 import modal from "./features/modal"
-import viewportWidth, { attachResizeListener } from "./features/viewportWidth"
+import width, { attachResizeListener } from "./features/width"
 
 const store = configureStore({
     reducer: {
         modal,
-        viewportWidth
+        width
     }
 })
 

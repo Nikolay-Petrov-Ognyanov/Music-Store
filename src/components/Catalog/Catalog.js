@@ -12,7 +12,7 @@ export default function Catalog() {
 	const dispatch = useDispatch()
 
 	const modal = useSelector(state => state.modal.value)
-	// const viewportWidth = useSelector(state => state.viewportWidth.value)
+	const width = useSelector(state => state.width.value)
 
 	const { category } = useParams()
 
@@ -21,6 +21,11 @@ export default function Catalog() {
 	const [filteredByManufacturer, setFilteredByManufacturer] = useState([])
 	const [filteredByNumberOfKeys, setFilteredByNumberOfKeys] = useState([])
 	const [sortedInstruments, setSortedInstruments] = useState([])
+	const [displayedInstruments, setDisplayedInstruments] = useState([])
+	const [pendingInstruments, setPendingInsturments] = useState([])
+	const [instrumentsToBeLoaded, setInstrumentsToBeLoaded] = useState(
+		width && width > 600 ? 9 : 5
+	)
 
 	const [showDropdownMenu, setShowDropdownMenu] = useState(false)
 	const [sortingCriteria, setSortingCriteria] = useState("Alphabetical A-Z")
@@ -247,6 +252,15 @@ export default function Catalog() {
 		handleSorting(sortingCriteria)
 	}, [filteredByNumberOfKeys, handleSorting, sortingCriteria])
 
+	useEffect(() => {
+		setInstrumentsToBeLoaded(width && width > 600 ? 9 : 5)
+	}, [width])
+
+	useEffect(() => {
+		setDisplayedInstruments(sortedInstruments.slice(0, instrumentsToBeLoaded))
+		setPendingInsturments(sortedInstruments.slice(instrumentsToBeLoaded))
+	}, [instrumentsToBeLoaded, sortedInstruments])
+
 	function handleManufacturerCheckboxChange(manufacturer) {
 		setSelectedManufacturers(previouslySelected => {
 			if (previouslySelected.includes(manufacturer)) {
@@ -265,6 +279,22 @@ export default function Catalog() {
 				return [...previouslySelected, numberofKeys]
 			}
 		})
+	}
+
+	function loadMore() {
+		const pending = [...pendingInstruments].slice(0, instrumentsToBeLoaded)
+
+		setDisplayedInstruments(state => [...state].concat(pending))
+		setPendingInsturments(state => [...state].slice(instrumentsToBeLoaded))
+	}
+
+	function loadMoreButtonClassName() {
+		if (displayedInstruments.length && sortedInstruments.length
+			&& displayedInstruments.length < sortedInstruments.length) {
+			return style.load_more_button_show
+		} else {
+			return style.load_more_button_hide
+		}
 	}
 
 	function modalContainerClassName() {
@@ -317,7 +347,7 @@ export default function Catalog() {
 			</div>
 
 			<span className={style.items_counter}>
-				Showing X products out of {sortedInstruments.length}
+				Showing {displayedInstruments.length} products out of {sortedInstruments.length}
 			</span>
 		</div>
 
@@ -353,12 +383,7 @@ export default function Catalog() {
 									type="checkbox"
 									className={style.checkbox}
 									checked={selectedManufacturers.includes(manufacturer)}
-
-									onChange={() => {
-										handleManufacturerCheckboxChange(
-											manufacturer
-										)
-									}}
+									onChange={() => handleManufacturerCheckboxChange(manufacturer)}
 								/>
 
 								<span className={style.filtering_criteria_span}>
@@ -382,10 +407,7 @@ export default function Catalog() {
 									type="checkbox"
 									className={style.checkbox}
 									checked={selectedNumbersOfKeys.includes(numberOfKeys)}
-
-									onChange={() => handleNumberOfKeysCheckboxChange(
-										numberOfKeys
-									)}
+									onChange={() => handleNumberOfKeysCheckboxChange(numberOfKeys)}
 								/>
 
 								<span className={style.filtering_criteria_span}>
@@ -406,12 +428,19 @@ export default function Catalog() {
 
 			<div className={style.right}>
 				<div className={style.cards}>
-					{sortedInstruments && sortedInstruments.map(item => (
+					{displayedInstruments && displayedInstruments.map(item => (
 						<Card key={item.id} item={item} />
 					))}
 				</div>
 			</div>
 		</div>
+
+		<button
+			className={loadMoreButtonClassName()}
+			onClick={loadMore}
+		>
+			Load more
+		</button>
 
 		<div className={modalContainerClassName()}>
 			<div className={style.modal}>
