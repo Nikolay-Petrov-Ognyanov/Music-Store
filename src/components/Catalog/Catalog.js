@@ -4,18 +4,15 @@ import { useNavigate, useParams } from "react-router-dom"
 import Card from "../Card/Card"
 import Slider from "rc-slider"
 import "rc-slider/assets/index.css"
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 
 export default function Catalog() {
-	const viewportWidth = useSelector(state => state.viewportWidth.value)
-
-	useEffect(() => {
-		console.log(viewportWidth)
-	}, [viewportWidth])
+	const navigate = useNavigate()
 
 	const { category } = useParams()
 
-	const navigate = useNavigate()
+	// const showModal = useSelector(state => state.modal.value)
+	// const viewportWidth = useSelector(state => state.viewportWidth.value)
 
 	const [instruments, setInstruments] = useState(null)
 	const [filteredByPrice, setFilteredByPrice] = useState([])

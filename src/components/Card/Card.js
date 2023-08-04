@@ -1,8 +1,17 @@
 import style from "./Card.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
+import { useDispatch } from "react-redux"
+import { showModal, hideModal } from "../../redux/features/modal"
 
 export default function Card({ item }) {
+    const dispatch = useDispatch()
+
+    function handleAddToCart() {
+        dispatch(showModal())
+        setTimeout(() => { dispatch(hideModal()) }, 3000)
+    }
+
     const stars = Array.from({ length: item.rating }, (star, index) => (
         <FontAwesomeIcon key={index} icon={faStar} />
     ))
@@ -35,7 +44,12 @@ export default function Card({ item }) {
 
             </p>
 
-            <button className={style.button} >Add to cart</button>
+            <button
+                className={style.button}
+
+                onClick={handleAddToCart}
+            >Add to cart
+            </button>
         </div>
     </article>
 }
