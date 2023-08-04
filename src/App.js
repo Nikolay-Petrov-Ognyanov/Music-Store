@@ -4,13 +4,8 @@ import Footer from "./components/Footer/Footer"
 import Header from "./components/Header/Header"
 import Catalog from "./components/Catalog/Catalog"
 import About from "./components/About/About"
-import { useEffect, useState } from "react"
 
 export default function App() {
-
-
-
-
 	return <div className="App">
 		<Header />
 

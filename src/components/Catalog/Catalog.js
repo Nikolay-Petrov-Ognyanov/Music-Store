@@ -4,24 +4,17 @@ import { useNavigate, useParams } from "react-router-dom"
 import Card from "../Card/Card"
 import Slider from "rc-slider"
 import "rc-slider/assets/index.css"
-import { useViewportWidth } from "../Context/ViewportWidthContext"
 
 export default function Catalog() {
-	const viewportWidth = useViewportWidth()
-
-	useEffect(() => {
-		console.log(viewportWidth)
-	}, [viewportWidth])
-
 	const { category } = useParams()
 
 	const navigate = useNavigate()
 
 	const [instruments, setInstruments] = useState(null)
-
 	const [filteredByPrice, setFilteredByPrice] = useState([])
 	const [filteredByManufacturer, setFilteredByManufacturer] = useState([])
 	const [filteredByNumberOfKeys, setFilteredByNumberOfKeys] = useState([])
+	const [sortedInstruments, setSortedInstruments] = useState([])
 
 	const [showDropdownMenu, setShowDropdownMenu] = useState(false)
 	const [sortingCriteria, setSortingCriteria] = useState("Alphabetical A-Z")
@@ -210,6 +203,44 @@ export default function Catalog() {
 		}
 	}, [filteredByPrice, filteredByManufacturer, selectedNumbersOfKeys])
 
+	useEffect(() => {
+		handleSorting(sortingCriteria)
+	}, [sortingCriteria, filteredByNumberOfKeys])
+
+	function handleSorting(criteria) {
+		if (filteredByNumberOfKeys) {
+			if (criteria === "Alphabetical A-Z") {
+				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
+					return a.name.localeCompare(b.name)
+				}))
+			}
+
+			if (criteria === "Alphabetical Z-A") {
+				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
+					return b.name.localeCompare(a.name)
+				}))
+			}
+
+			if (criteria === "Price ascending") {
+				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
+					const aPrice = a.price * (1 - a.discount)
+					const bPrice = b.price * (1 - b.discount)
+
+					return aPrice - bPrice
+				}))
+			}
+
+			if (criteria === "Price descending") {
+				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
+					const aPrice = a.price * (1 - a.discount)
+					const bPrice = b.price * (1 - b.discount)
+
+					return bPrice - aPrice
+				}))
+			}
+		}
+	}
+
 	function handleManufacturerCheckboxChange(event, manufacturer) {
 		const isChecked = event.target.checked
 
@@ -357,7 +388,7 @@ export default function Catalog() {
 
 			<div className={style.right}>
 				<div className={style.cards}>
-					{filteredByNumberOfKeys && filteredByNumberOfKeys.map(item => (
+					{sortedInstruments && sortedInstruments.map(item => (
 						<Card key={item.id} item={item} />
 					))}
 				</div>
