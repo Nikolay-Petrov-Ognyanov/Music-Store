@@ -4,8 +4,15 @@ import { useNavigate, useParams } from "react-router-dom"
 import Card from "../Card/Card"
 import Slider from "rc-slider"
 import "rc-slider/assets/index.css"
+import { useSelector } from "react-redux"
 
 export default function Catalog() {
+	const viewportWidth = useSelector(state => state.viewportWidth.value)
+
+	useEffect(() => {
+		console.log(viewportWidth)
+	}, [viewportWidth])
+
 	const { category } = useParams()
 
 	const navigate = useNavigate()
@@ -203,7 +210,7 @@ export default function Catalog() {
 		}
 	}, [filteredByPrice, filteredByManufacturer, selectedNumbersOfKeys])
 
-	const handleSorting = useCallback((criteria) => {
+	const handleSorting = useCallback(criteria => {
 		if (filteredByNumberOfKeys) {
 			if (criteria === "Alphabetical A-Z") {
 				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
@@ -239,7 +246,7 @@ export default function Catalog() {
 
 	useEffect(() => {
 		handleSorting(sortingCriteria)
-	}, [sortingCriteria, filteredByNumberOfKeys, handleSorting, sortedInstruments])
+	}, [filteredByNumberOfKeys, handleSorting, sortingCriteria])
 
 	function handleManufacturerCheckboxChange(event, manufacturer) {
 		const isChecked = event.target.checked
