@@ -4,15 +4,17 @@ import { useNavigate, useParams } from "react-router-dom"
 import Card from "../Card/Card"
 import Slider from "rc-slider"
 import "rc-slider/assets/index.css"
-// import { useSelector } from "react-redux"
+import { hideModal } from "../../redux/features/modal"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function Catalog() {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
+	const modal = useSelector(state => state.modal.value)
+	// const viewportWidth = useSelector(state => state.viewportWidth.value)
 
 	const { category } = useParams()
-
-	// const showModal = useSelector(state => state.modal.value)
-	// const viewportWidth = useSelector(state => state.viewportWidth.value)
 
 	const [instruments, setInstruments] = useState(null)
 	const [filteredByPrice, setFilteredByPrice] = useState([])
@@ -44,6 +46,46 @@ export default function Catalog() {
 		"Price ascending",
 		"Price descending"
 	]
+
+	const handleSorting = useCallback(criteria => {
+		if (filteredByNumberOfKeys) {
+			if (criteria === "Alphabetical A-Z") {
+				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
+					return a.name.localeCompare(b.name)
+				}))
+			}
+
+			if (criteria === "Alphabetical Z-A") {
+				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
+					return b.name.localeCompare(a.name)
+				}))
+			}
+
+			if (criteria === "Price ascending") {
+				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
+					const aPrice = a.price * (1 - a.discount)
+					const bPrice = b.price * (1 - b.discount)
+
+					return aPrice - bPrice
+				}))
+			}
+
+			if (criteria === "Price descending") {
+				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
+					const aPrice = a.price * (1 - a.discount)
+					const bPrice = b.price * (1 - b.discount)
+
+					return bPrice - aPrice
+				}))
+			}
+		}
+	}, [filteredByNumberOfKeys])
+
+	const clearAllFilters = useCallback(() => {
+		setPriceRange([lowestPrice, highestPrice])
+		setSelectedManufacturers([])
+		setSelectedNumbersOfKeys([])
+	}, [lowestPrice, highestPrice])
 
 	useEffect(() => {
 		if (!category) navigate("/catalog/accordions")
@@ -77,7 +119,7 @@ export default function Catalog() {
 
 		fetchData()
 		clearAllFilters()
-	}, [category, navigate])
+	}, [category, navigate, clearAllFilters])
 
 	useEffect(() => {
 		const filtered_by_price = instruments && instruments.filter(instrument => {
@@ -201,40 +243,6 @@ export default function Catalog() {
 		}
 	}, [filteredByPrice, filteredByManufacturer, selectedNumbersOfKeys])
 
-	const handleSorting = useCallback(criteria => {
-		if (filteredByNumberOfKeys) {
-			if (criteria === "Alphabetical A-Z") {
-				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
-					return a.name.localeCompare(b.name)
-				}))
-			}
-
-			if (criteria === "Alphabetical Z-A") {
-				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
-					return b.name.localeCompare(a.name)
-				}))
-			}
-
-			if (criteria === "Price ascending") {
-				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
-					const aPrice = a.price * (1 - a.discount)
-					const bPrice = b.price * (1 - b.discount)
-
-					return aPrice - bPrice
-				}))
-			}
-
-			if (criteria === "Price descending") {
-				setSortedInstruments(filteredByNumberOfKeys.sort((a, b) => {
-					const aPrice = a.price * (1 - a.discount)
-					const bPrice = b.price * (1 - b.discount)
-
-					return bPrice - aPrice
-				}))
-			}
-		}
-	}, [filteredByNumberOfKeys])
-
 	useEffect(() => {
 		handleSorting(sortingCriteria)
 	}, [filteredByNumberOfKeys, handleSorting, sortingCriteria])
@@ -259,10 +267,12 @@ export default function Catalog() {
 		})
 	}
 
-	function clearAllFilters() {
-		setPriceRange([lowestPrice, highestPrice])
-		setSelectedManufacturers([])
-		setSelectedNumbersOfKeys([])
+	function modalContainerClassName() {
+		if (modal.display) {
+			return style.modal_container_show
+		} else {
+			return style.modal_container_hide
+		}
 	}
 
 	return <section className={style.catalog}>
@@ -400,6 +410,22 @@ export default function Catalog() {
 						<Card key={item.id} item={item} />
 					))}
 				</div>
+			</div>
+		</div>
+
+		<div className={modalContainerClassName()}>
+			<div className={style.modal}>
+				<div className={style.modal_text}>
+					<p>{modal.itemName}</p>
+					<p>was added to the cart</p>
+				</div>
+
+				<button
+					className={style.modal_button}
+					onClick={() => dispatch(hideModal())}
+				>
+					OK
+				</button>
 			</div>
 		</div>
 	</section>

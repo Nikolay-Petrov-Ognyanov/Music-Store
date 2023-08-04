@@ -1,10 +1,30 @@
+.catalog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    position: relative;
+}
+
+.top {
+    margin: 0 0 1vw 0;
+    border-radius: 3vw;
+    text-align: center;
+    display: flex;
+    gap: 1vw;
+    justify-content: space-evenly;
+    height: 3vw;
+    align-items: center;
+    color: white;
+    font-size: 1.5vw;
+}
+
 .left {
     width: 23.25vw;
     display: flex;
     flex-direction: column;
     border: 0.25vw solid;
     border-radius: 1vw;
-    padding-top: vw;
     color: white;
 }
 
@@ -46,26 +66,6 @@
     width: 71.75vw;
     margin: 0 0 0 1vw;
     color: white;
-}
-
-.catalog {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-}
-
-.top {
-    margin: 0 0 1vw 0;
-    border-radius: 3vw;
-    text-align: center;
-    display: flex;
-    gap: 1vw;
-    justify-content: space-evenly;
-    height: 3vw;
-    align-items: center;
-    color: white;
-    font-size: 1.5vw;
 }
 
 .sorting_container {
@@ -148,7 +148,63 @@
     justify-content: center;
 }
 
-.clear_all_filters:hover{
+.clear_all_filters:hover {
+    color: black;
+    border-color: white;
+    background-color: white;
+}
+
+.modal_container_show {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_container_hide {
+    z-index: -1;
+    pointer-events: none;
+}
+
+.modal {
+    width: calc(100vw / 3);
+    height: 12.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: black;
+    border: 0.25vw solid white;
+    border-radius: 2vw;
+    font-size: 2vw;
+}
+
+.modal_text {
+    text-align: center;
+}
+
+.modal_button {
+    color: white;
+    border: 0.25vw solid white;
+    border-radius: 2vw;
+    height: 3vw;
+    cursor: pointer;
+    width: 50%;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_button:hover {
     color: black;
     border-color: white;
     background-color: white;

@@ -8,7 +8,7 @@ export default function Card({ item }) {
     const dispatch = useDispatch()
 
     function handleAddToCart() {
-        dispatch(showModal())
+        dispatch(showModal(item.name))
         setTimeout(() => { dispatch(hideModal()) }, 3000)
     }
 
