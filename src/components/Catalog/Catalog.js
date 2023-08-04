@@ -259,7 +259,8 @@ export default function Catalog() {
 	useEffect(() => {
 		setDisplayedInstruments(sortedInstruments.slice(0, instrumentsToBeLoaded))
 		setPendingInsturments(sortedInstruments.slice(instrumentsToBeLoaded))
-	}, [instrumentsToBeLoaded, sortedInstruments])
+
+	}, [instrumentsToBeLoaded, sortedInstruments, sortingCriteria])
 
 	function handleManufacturerCheckboxChange(manufacturer) {
 		setSelectedManufacturers(previouslySelected => {
