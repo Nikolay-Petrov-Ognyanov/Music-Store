@@ -1,3 +1,5 @@
+@import "rc-slider/assets/index.css";
+
 .catalog {
     display: flex;
     flex-direction: column;
@@ -22,43 +24,69 @@
     width: 23.25vw;
     display: flex;
     flex-direction: column;
-    border: 0.25vw solid;
-    border-radius: 1vw;
+    border: calc(0.25vw * var(--scale)) solid;
+    border-radius: calc(1.5vw * var(--scale));
     color: white;
 }
 
 .filter_container {
-    margin: 2vw 1vw;
+    padding: 0 calc(1vw * var(--scale));
+    margin: calc(2vw * var(--scale)) 0vw;
 }
 
 .h2 {
-    font-size: 2vw;
-    margin-bottom: 1vw;
+    font-size: calc(2vw * var(--scale));
+    margin-bottom: calc(1vw * var(--scale));
     text-align: center;
 }
 
+.slider_container {
+    margin: calc(2vw * var(--scale)) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .price_range {
-    margin-top: 1vw;
+    margin-top: calc(1vw * var(--scale));
     display: flex;
     justify-content: space-between;
-    font-size: 1.5vw;
+    font-size: calc(1.5vw * var(--scale));
+    width: 80%;
+}
+
+.catalog .slider_container .rc-slider {
+    width: 80% !important;
 }
 
 .filtering_criteria_container {
     display: flex;
     flex-direction: column;
-    font-size: 1.75vw;
 }
 
 .filtering_criteria {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: calc(1.75vw * var(--scale));
 }
 
 .checkbox {
-    scale: 1.5;
-    margin-right: 1vw;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: calc(2vw * var(--scale));
+    width: calc(2vw * var(--scale));
+    background-color: white;
+    border-radius: calc(0.25vw * var(--scale));
+    margin-right: calc(0.5vw * var(--scale));
     cursor: pointer;
+}
 
+.checkbox:checked {
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
 .right {
@@ -80,21 +108,23 @@
 }
 
 .select_container {
-    margin-top: calc(7vw * var(--scale));
+    margin-top: calc(7.5vw * var(--scale));
     display: flex;
     flex-direction: column;
     z-index: 2;
     background-color: transparent;
+    pointer-events: none;
 }
 
 .select {
-    border-radius: calc(0.5vw * var(--scale));
-    border: calc(0.15vw * var(--scale)) solid;
-    width: calc(13.25vw * var(--scale));
+    border-radius: calc(1.5vw * var(--scale));
+    border: calc(0.25vw * var(--scale)) solid;
+    width: calc(14vw * var(--scale));
+    cursor: pointer;
+    pointer-events: all;
 }
 
 .select:hover {
-    cursor: pointer;
     color: black;
     border-color: white;
     background-color: white;
@@ -103,7 +133,8 @@
 .ul_show {
     opacity: 100%;
     pointer-events: all;
-    border-radius: calc(0.5vw * var(--scale));
+    border-radius: calc(1.5vw * var(--scale));
+    background-color: transparent;
 }
 
 .ul_hide {
@@ -112,11 +143,12 @@
 }
 
 .li {
-    border-radius: calc(0.5vw * var(--scale));
+    border-radius: calc(1.5vw * var(--scale));
+    cursor: pointer;
+    border: 0.25vw solid white;
 }
 
 .li:hover {
-    cursor: pointer;
     color: black;
     background-color: white;
 }
@@ -136,11 +168,11 @@
 
 .clear_all_filters {
     color: white;
-    font-size: 2vw;
-    height: 3vw;
-    border: 0.25vw solid;
-    border-radius: 2vw;
-    margin: 1vw;
+    font-size: calc(2vw * var(--scale));
+    height: calc(3vw * var(--scale));
+    border: calc(0.25vw * var(--scale)) solid;
+    border-radius: calc(2vw * var(--scale));
+    margin: calc(1vw * var(--scale));
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -158,11 +190,11 @@
     border: calc(0.25vw * var(--scale)) solid white;
     border-radius: calc(2vw * var(--scale));
     font-size: calc(2vw * var(--scale));
-    margin: calc(1vw * var(--scale));
+    margin: calc(1vw * var(--scale)) 0;
     margin-bottom: 0;
     cursor: pointer;
     padding: 0 calc(2vw * var(--scale));
-    width: calc(23.25vw * var(--scale));
+    width: 96vw;
 }
 
 .load_more_button_show:hover {
@@ -204,16 +236,16 @@
 }
 
 .modal {
-    width: calc(100vw / 3);
-    height: 12.5vw;
+    width: calc(calc(100vw / 3) * var(--scale));
+    height: calc(12.5vw * var(--scale));
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     background-color: black;
-    border: 0.25vw solid white;
-    border-radius: 2vw;
-    font-size: 2vw;
+    border: calc(0.25vw * var(--scale)) solid white;
+    border-radius: calc(2vw * var(--scale));
+    font-size: calc(2vw * var(--scale));
 }
 
 .modal_text {
@@ -222,9 +254,8 @@
 
 .modal_button {
     color: white;
-    border: 0.25vw solid white;
-    border-radius: 2vw;
-    /* height: 3vw; */
+    border: calc(0.25vw * var(--scale)) solid white;
+    border-radius: calc(2vw * var(--scale));
     cursor: pointer;
     width: 50%;
     display: flex;

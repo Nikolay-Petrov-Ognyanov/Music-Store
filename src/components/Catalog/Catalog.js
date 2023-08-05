@@ -6,6 +6,7 @@ import Slider from "rc-slider"
 import "rc-slider/assets/index.css"
 import { hideModal } from "../../redux/features/modal"
 import { useDispatch, useSelector } from "react-redux"
+import scrollToTop from "../../utility/scrollToTop"
 
 export default function Catalog() {
 	const navigate = useNavigate()
@@ -90,6 +91,7 @@ export default function Catalog() {
 		setPriceRange([lowestPrice, highestPrice])
 		setSelectedManufacturers([])
 		setSelectedNumbersOfKeys([])
+		scrollToTop()
 	}, [lowestPrice, highestPrice])
 
 	useEffect(() => {
@@ -156,7 +158,6 @@ export default function Catalog() {
 		)
 
 		setManufacturers(sortedManufacturers)
-
 		setFilteredByPrice(filtered_by_price)
 	}, [priceRange, instruments])
 
@@ -259,7 +260,6 @@ export default function Catalog() {
 	useEffect(() => {
 		setDisplayedInstruments(sortedInstruments.slice(0, instrumentsToBeLoaded))
 		setPendingInsturments(sortedInstruments.slice(instrumentsToBeLoaded))
-
 	}, [instrumentsToBeLoaded, sortedInstruments, sortingCriteria])
 
 	function handleManufacturerCheckboxChange(manufacturer) {
@@ -270,6 +270,8 @@ export default function Catalog() {
 				return [...previouslySelected, manufacturer]
 			}
 		})
+
+		scrollToTop()
 	}
 
 	function handleNumberOfKeysCheckboxChange(numberofKeys) {
@@ -280,6 +282,8 @@ export default function Catalog() {
 				return [...previouslySelected, numberofKeys]
 			}
 		})
+
+		scrollToTop()
 	}
 
 	function loadMore() {
@@ -316,8 +320,9 @@ export default function Catalog() {
 					onMouseLeave={() => setShowDropdownMenu(false)}
 				>
 					<p
-						onMouseOver={() => setShowDropdownMenu(true)}
 						className={style.select}
+						onMouseOver={() => setShowDropdownMenu(true)}
+						onClick={() => setShowDropdownMenu(!showDropdownMenu)}
 					>
 						{sortingCriteria}
 					</p>
@@ -354,7 +359,7 @@ export default function Catalog() {
 
 		<div className={style.bottom}>
 			<aside className={style.left}>
-				<div className={style.filter_container}>
+				<div className={style.slider_container}>
 					<h2 className={style.h2}>Price</h2>
 
 					<Slider
@@ -363,6 +368,7 @@ export default function Catalog() {
 						value={priceRange}
 						onChange={(values) => setPriceRange(values)}
 						range
+						className={style["rc-slider"]}
 					/>
 
 					<p className={style.price_range} >
@@ -447,7 +453,7 @@ export default function Catalog() {
 			<div className={style.modal}>
 				<div className={style.modal_text}>
 					<p>{modal.itemName}</p>
-					<p>was added to the cart</p>
+					<p>has been added to the cart.</p>
 				</div>
 
 				<button

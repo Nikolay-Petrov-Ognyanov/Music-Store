@@ -1,5 +1,5 @@
 import style from "./Footer.module.css"
-import { scrollToTop } from "../../utility/scrollToTop"
+import  scrollToTop  from "../../utility/scrollToTop"
 import { NavLink, useLocation } from "react-router-dom"
 
 export default function Footer() {

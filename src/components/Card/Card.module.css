@@ -1,12 +1,12 @@
 .card {
-    border-radius: calc(1vw * var(--card_scale));
+    border-radius: calc(1.5vw * var(--scale));
     overflow: hidden;
-    width: calc(23.25vw * var(--card_scale));
+    width: calc(23.25vw * var(--scale));
     color: white;
 }
 
 .image_container {
-    height: calc(17.5vw * var(--card_scale));
+    height: calc(17.5vw * var(--scale));
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -16,18 +16,18 @@
 
 .spix_96 {
     scale: 1.31;
-    margin-left: calc(1.5vw * var(--card_scale));
-    margin-bottom: calc(0.6vw * var(--card_scale));
+    margin-left: calc(1.5vw * var(--scale));
+    margin-bottom: calc(0.6vw * var(--scale));
 }
 
 .text_container {
-    height: calc(17.5vw * var(--card_scale));
-    border-left: calc(0.25vw * var(--card_scale)) solid;
-    border-right: calc(0.25vw * var(--card_scale)) solid;
-    border-bottom: calc(0.25vw * var(--card_scale)) solid;
-    border-bottom-left-radius: calc(1vw * var(--card_scale));
-    border-bottom-right-radius: calc(1vw * var(--card_scale));
-    padding: calc(0.5vw * var(--card_scale));
+    height: calc(17.5vw * var(--scale));
+    border-left: calc(0.25vw * var(--scale)) solid;
+    border-right: calc(0.25vw * var(--scale)) solid;
+    border-bottom: calc(0.25vw * var(--scale)) solid;
+    border-bottom-left-radius: calc(1.5vw * var(--scale));
+    border-bottom-right-radius: calc(1.5vw * var(--scale));
+    padding: calc(0.5vw * var(--scale));
     color: white;
     display: flex;
     flex-direction: column;
@@ -36,11 +36,11 @@
 }
 
 .name {
-    font-size: calc(1.75vw * var(--card_scale));
+    font-size: calc(1.75vw * var(--scale));
 }
 
 .rating {
-    font-size: calc(1.25vw * var(--card_scale));
+    font-size: calc(1.25vw * var(--scale));
 }
 
 .stars {
@@ -48,22 +48,22 @@
 }
 
 .description {
-    font-size: calc(1.25vw * var(--card_scale));
-    height: calc(6vw * var(--card_scale));
+    font-size: calc(1.25vw * var(--scale));
+    height: calc(6vw * var(--scale));
     display: flex;
     align-items: center;
 }
 
 .price {
     display: flex;
-    font-size: calc(1.5vw * var(--card_scale));
-    gap: calc(1vw * var(--card_scale));
+    font-size: calc(1.5vw * var(--scale));
+    gap: calc(1vw * var(--scale));
     justify-content: center;
 }
 
 .previous_price {
     position: relative;
-    font-size: calc(1.5vw * var(--card_scale));
+    font-size: calc(1.5vw * var(--scale));
     color: red;
 }
 
@@ -74,7 +74,7 @@
     top: 50%;
     left: 0;
     width: 100%;
-    height: calc(0.125vw * var(--card_scale));
+    height: calc(0.125vw * var(--scale));
     background-color: red;
 }
 
@@ -92,16 +92,16 @@
 
 .button {
     color: white;
-    font-size: calc(1.5vw * var(--card_scale));
-    padding: 0 calc(1vw * var(--card_scale));
-    border-radius: calc(0.5vw * var(--card_scale));
+    font-size: calc(1.5vw * var(--scale));
+    padding: 0 calc(1vw * var(--scale));
+    border-radius: calc(1.5vw * var(--scale));
     width: 100%;
-    border: calc(0.25vw * var(--card_scale)) solid;
+    border: calc(0.25vw * var(--scale)) solid;
+    cursor: pointer;
 }
 
 .button:hover {
     color: black;
     border-color: white;
     background-color: white;
-    cursor: pointer;
 }

@@ -1,6 +1,5 @@
 :root {
 	--scale: 1;
-	--card_scale: 1
 }
 
 * {
@@ -52,6 +51,5 @@ main {
 @media (max-width: 600px) {
 	:root {
 		--scale: 2;
-		--card_scale: 2;
 	}
 }
