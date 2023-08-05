@@ -155,13 +155,14 @@
 
 .load_more_button_show {
     color: white;
-    border: 0.25vw solid white;
-    border-radius: 2vw;
-    font-size: 2vw;
-    margin: 1vw 1vw 0 1vw;
+    border: calc(0.25vw * var(--scale)) solid white;
+    border-radius: calc(2vw * var(--scale));
+    font-size: calc(2vw * var(--scale));
+    margin: calc(1vw * var(--scale));
+    margin-bottom: 0;
     cursor: pointer;
-    padding: 0 2vw;
-    width: 23.25vw;
+    padding: 0 calc(2vw * var(--scale));
+    width: calc(23.25vw * var(--scale));
 }
 
 .load_more_button_show:hover {
@@ -235,4 +236,23 @@
     color: black;
     border-color: white;
     background-color: white;
+}
+
+@media (max-width: 600px) {
+    .bottom {
+        gap: 2vw;
+    }
+
+    .left {
+        width: 47vw;
+    }
+
+    .right {
+        width: 47vw;
+        margin: 0;
+    }
+
+    .cards {
+        justify-content: center;
+    }
 }

@@ -1,12 +1,12 @@
-.article {
-    border-radius: 1vw;
+.card {
+    border-radius: calc(1vw * var(--card_scale));
     overflow: hidden;
-    width: 23.25vw;
+    width: calc(23.25vw * var(--card_scale));
     color: white;
 }
 
 .image_container {
-    height: 17.5vw;
+    height: calc(17.5vw * var(--card_scale));
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -16,18 +16,18 @@
 
 .spix_96 {
     scale: 1.31;
-    margin-left: 1.5vw;
-    margin-bottom: 0.6vw;
+    margin-left: calc(1.5vw * var(--card_scale));
+    margin-bottom: calc(0.6vw * var(--card_scale));
 }
 
 .text_container {
-    height: 17.5vw;
-    border-left: 0.25vw solid;
-    border-right: 0.25vw solid;
-    border-bottom: 0.25vw solid;
-    border-bottom-left-radius: 1vw;
-    border-bottom-right-radius: 1vw;
-    padding: 0.5vw;
+    height: calc(17.5vw * var(--card_scale));
+    border-left: calc(0.25vw * var(--card_scale)) solid;
+    border-right: calc(0.25vw * var(--card_scale)) solid;
+    border-bottom: calc(0.25vw * var(--card_scale)) solid;
+    border-bottom-left-radius: calc(1vw * var(--card_scale));
+    border-bottom-right-radius: calc(1vw * var(--card_scale));
+    padding: calc(0.5vw * var(--card_scale));
     color: white;
     display: flex;
     flex-direction: column;
@@ -36,11 +36,11 @@
 }
 
 .name {
-    font-size: 1.75vw;
+    font-size: calc(1.75vw * var(--card_scale));
 }
 
 .rating {
-    font-size: 1.25vw;
+    font-size: calc(1.25vw * var(--card_scale));
 }
 
 .stars {
@@ -48,22 +48,22 @@
 }
 
 .description {
-    font-size: 1.25vw;
-    height: 6vw;
+    font-size: calc(1.25vw * var(--card_scale));
+    height: calc(6vw * var(--card_scale));
     display: flex;
     align-items: center;
 }
 
 .price {
     display: flex;
-    font-size: 1.5vw;
-    gap: 1vw;
+    font-size: calc(1.5vw * var(--card_scale));
+    gap: calc(1vw * var(--card_scale));
     justify-content: center;
 }
 
 .previous_price {
     position: relative;
-    font-size: 1.5vw;
+    font-size: calc(1.5vw * var(--card_scale));
     color: red;
 }
 
@@ -74,7 +74,7 @@
     top: 50%;
     left: 0;
     width: 100%;
-    height: 0.125vw;
+    height: calc(0.125vw * var(--card_scale));
     background-color: red;
 }
 
@@ -92,11 +92,11 @@
 
 .button {
     color: white;
-    font-size: 1.5vw;
-    padding: 0 1vw;
-    border-radius: 0.5vw;
+    font-size: calc(1.5vw * var(--card_scale));
+    padding: 0 calc(1vw * var(--card_scale));
+    border-radius: calc(0.5vw * var(--card_scale));
     width: 100%;
-    border: 0.125vw solid;
+    border: calc(0.25vw * var(--card_scale)) solid;
 }
 
 .button:hover {

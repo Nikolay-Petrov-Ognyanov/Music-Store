@@ -16,7 +16,7 @@ export default function Card({ item }) {
         <FontAwesomeIcon key={index} icon={faStar} />
     ))
 
-    return <article className={style.article}>
+    return <article className={style.card}>
         <div className={style.image_container}>
             <img
                 src={item.image} alt={item.name}
