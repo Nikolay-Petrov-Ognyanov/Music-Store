@@ -1,20 +1,22 @@
 .nav {
     width: 96vw;
-    margin: 1vw 0;
+    margin: calc(1vw * var(--scale)) 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     color: white;
+    flex-wrap: wrap;
+    gap: calc(1vw * var(--scale));
 }
 
 .button {
-    border: 0.25vw solid;
-    border-radius: 2vw;
-    width: 23.25vw;
+    border: calc(0.25vw * var(--scale)) solid;
+    border-radius: calc(2vw * var(--scale));
+    width: calc(23.25vw * var(--scale));
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 2vw;
+    font-size: calc(2vw * var(--scale));
     color: white;
 }
 

@@ -440,7 +440,7 @@ export default function Catalog() {
 			className={loadMoreButtonClassName()}
 			onClick={loadMore}
 		>
-			Load more
+			Load More
 		</button>
 
 		<div className={modalContainerClassName()}>

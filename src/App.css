@@ -1,44 +1,55 @@
+:root {
+	--scale: 1
+}
+
 * {
-  border-color: white;
-  background-color: black;
-  user-select: none;
+	border-color: white;
+	background-color: black;
+	user-select: none;
 }
 
 .stars {
-  color: gold !important;
+	color: gold !important;
 }
 
 body {
-  color: white;
-  margin: 0 2vw;
+	color: white;
+	margin: 0 2vw;
 }
 
 a {
-  color: white;
-  text-decoration: none;
+	color: white;
+	text-decoration: none;
 }
 
 main {
-  color: white;
-  flex-grow: 1;
-  display: flex;
+	color: white;
+	flex-grow: 1;
+	display: flex;
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  position: relative;
+	display: flex;
+	flex-direction: column;
+	color: white;
+	position: relative;
+	height: 100vh;
 }
 
 .main_container {
-  width: 75.5vw;
-  color: white;
-  padding: 0 2vw;
+	width: 75.5vw;
+	color: white;
+	padding: 0 2vw;
 }
 
 .active {
-  color: black !important;
-  border-color: white !important;
-  background-color: white
+	color: black !important;
+	border-color: white !important;
+	background-color: white
+}
+
+@media (max-width: 600px) {
+	:root {
+		--scale: 2
+	}
 }

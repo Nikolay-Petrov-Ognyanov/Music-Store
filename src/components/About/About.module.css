@@ -1,15 +1,15 @@
 .section {
-    margin: 2vw 0 4vw 0;
+    margin: calc(2vw * var(--scale)) 0 calc(4vw * var(--scale)) 0;
     text-align: center;
-    padding: 0 4vw;
+    padding: 0 calc(2vw * var(--scale));
     color: white;
-    font-size: 2vw;
+    font-size: calc(2vw * var(--scale));
 }
 
 .h1 {
-    font-size: 4vw;
+    font-size: calc(4vw * var(--scale));
     color: white;
-    margin-bottom: 2vw;
+    margin-bottom: calc(2vw * var(--scale));
 }
 
 .h2 {
@@ -19,10 +19,10 @@
 
 .p {
     color: white;
-    margin-bottom: 2vw;
+    margin-bottom: calc(2vw * var(--scale));
 }
 
 .ul {
     color: white;
-    margin-bottom: 2vw;
+    margin-bottom: calc(2vw * var(--scale));
 }
