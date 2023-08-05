@@ -1,5 +1,5 @@
 .section {
-    margin: calc(2vw * var(--scale)) 0 calc(4vw * var(--scale)) 0;
+    margin-top: calc(2vw * var(--scale));
     text-align: center;
     padding: 0 calc(2vw * var(--scale));
     color: white;
@@ -7,7 +7,7 @@
 }
 
 .h1 {
-    font-size: calc(4vw * var(--scale));
+    font-size: calc(3vw * var(--scale));
     color: white;
     margin-bottom: calc(2vw * var(--scale));
 }
@@ -15,11 +15,14 @@
 .h2 {
     color: white;
     margin-bottom: 0;
+    font-size: calc(2.5vw * var(--scale));
+    margin-bottom: calc(1vw * var(--scale));
 }
 
 .p {
     color: white;
     margin-bottom: calc(2vw * var(--scale));
+    font-size: calc(2vw * var(--scale));
 }
 
 .ul {

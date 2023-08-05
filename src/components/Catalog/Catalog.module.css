@@ -48,16 +48,25 @@
     justify-content: center;
 }
 
+.rc-slider {
+    width: 80% !important;
+}
+
+.rc-slider-track {
+    height: 5vw !important;
+    background-color: red !important;
+}
+
+.rc-slder-rail {
+    background-color: red !important;
+}
+
 .price_range {
     margin-top: calc(1vw * var(--scale));
     display: flex;
     justify-content: space-between;
     font-size: calc(1.5vw * var(--scale));
     width: 80%;
-}
-
-.catalog .slider_container .rc-slider {
-    width: 80% !important;
 }
 
 .filtering_criteria_container {
