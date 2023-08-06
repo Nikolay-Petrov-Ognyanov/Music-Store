@@ -26,6 +26,7 @@ main {
 	color: white;
 	flex-grow: 1;
 	display: flex;
+	margin-top: 6vw;
 }
 
 .App {
@@ -34,6 +35,8 @@ main {
 	color: white;
 	position: relative;
 	height: 100vh;
+	align-items: center;
+	width: 96vw;
 }
 
 .main_container {
@@ -51,5 +54,9 @@ main {
 @media (max-width: 600px) {
 	:root {
 		--scale: 2;
+	}
+
+	main {
+		margin-top: 20vw;
 	}
 }

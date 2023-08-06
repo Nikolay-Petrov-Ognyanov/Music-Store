@@ -1,6 +1,6 @@
 .nav {
     width: 96vw;
-    margin: calc(1vw * var(--scale)) 0;
+    padding: calc(1vw * var(--scale)) 0;
     display: flex;
     justify-content: space-evenly;
     color: white;
@@ -24,4 +24,10 @@
     color: black;
     border-color: white;
     background-color: white;
+}
+
+@media (max-width: 600px) {
+    .nav {
+        height: calc(10vw * var(--scale));
+    }
 }

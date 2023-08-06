@@ -8,7 +8,7 @@
 }
 
 .top {
-    margin: 0 0 calc(1vw * var(--scale)) 0;
+    margin: calc(1vw * var(--scale));
     border-radius: calc(3vw * var(--scale));
     text-align: center;
     display: flex;
@@ -24,9 +24,12 @@
     width: 23.25vw;
     display: flex;
     flex-direction: column;
+    color: white;
+    position: sticky;
+    top: 7vw;
+    height: fit-content;
     border: calc(0.25vw * var(--scale)) solid;
     border-radius: calc(1.5vw * var(--scale));
-    color: white;
 }
 
 .filter_container {
@@ -117,7 +120,7 @@
 }
 
 .select_container {
-    margin-top: calc(7.5vw * var(--scale));
+    margin-top: 8vw;
     display: flex;
     flex-direction: column;
     z-index: 2;
@@ -285,6 +288,7 @@
 
     .left {
         width: 47vw;
+        top: 20vw;
     }
 
     .right {
@@ -294,5 +298,9 @@
 
     .cards {
         justify-content: center;
+    }
+
+    .select_container {
+        margin-top: 15vw;
     }
 }

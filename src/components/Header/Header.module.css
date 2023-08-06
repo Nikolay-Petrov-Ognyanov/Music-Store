@@ -20,24 +20,26 @@
 }
 
 .header {
-    width: 96vw;
-    position: sticky;
-    top: 0;
+    width: 100vw;
     z-index: 100;
     color: white;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav {
-    padding: calc(1vw * var(--scale)) 0;
     width: 96vw;
     display: flex;
     flex-wrap: wrap;
     gap: calc(1vw * var(--scale));
     justify-content: space-evenly;
-    position: sticky;
-    top: 0;
-    z-index: 100;
     color: white;
+    height: 5vw;
+    align-items: center;
+    margin-top: calc(1vw * var(--scale)) ;
+    margin-bottom: calc(1vw * var(--scale));
 }
 
 .button {
@@ -53,4 +55,10 @@
     color: black;
     border-color: white;
     background-color: white;
+}
+
+@media (max-width: 600px) {
+    .nav {
+        height: 16vw;
+    }
 }
