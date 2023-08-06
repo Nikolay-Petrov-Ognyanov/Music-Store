@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# Music Store Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The **Music Store Web Application** is a React-based online store where users can browse and explore various musical instruments. The application uses React Router for navigation, Redux for state management and custom styling with CSS modules. Users can view different instrument categories, apply filters and sort results. Additionally, a shopping cart modal provides feedback when adding items to the cart.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+1. [Getting Started](#getting-started)
+2. [Components](#components)
+    1. [Header](#header-component)
+    2. [Footer](#footer-component)
+    3. [About](#about-component)
+    4. [Card](#card-component)
+    5. [Catalog](#catalog-component)
+3. [Usage](#usage)
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To run the Music Store Web Application locally, follow these steps:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone the repository:
 
-### `npm test`
+    ```bash
+    git clone https://github.com/your-username/music-store-app.git
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Navigate to the project directory:
 
-### `npm run build`
+    ```bash
+    cd music-store-app
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Install dependencies:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    ```bash
+    npm install
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Start the development server:
 
-### `npm run eject`
+    ```bash
+    npm start
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The application will be accessible at `http://localhost:3000`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Components
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The application is composed of several key components that contribute to its functionality.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Header Component
 
-## Learn More
+The `Header` component displays the application's logo and navigation links, allowing users to explore different instrument categories.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Footer Component
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The `Footer` component displays navigation links to different "About" sections and includes logic to handle active link highlighting and scrolling to the top of the page.
 
-### Code Splitting
+### About Component
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The `About` component dynamically renders different pages within the "About" section of the application based on the provided route parameter.
 
-### Analyzing the Bundle Size
+### Card Component
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The `Card` component displays information about a musical instrument, including its image, name, ratings, description and price. Users can add items to the shopping cart using the "Add to Cart" button.
 
-### Making a Progressive Web App
+### Catalog Component
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The `Catalog` component represents the main functionality of the application. It allows users to browse different instrument categories, apply filters by price, manufacturer and number of keys and sort instruments based on different criteria. The component dynamically loads and displays instrument cards and includes a load more button for additional results. A shopping cart modal is also displayed when users add items to the cart.
 
-### Advanced Configuration
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. **Browsing Instruments**: Open the application and explore various instrument categories by clicking on the navigation links. Each category displays instrument cards with details.
 
-### Deployment
+2. **Filters and Sorting**: Use the filters and sorting options to refine your search. You can filter by price range, manufacturer and number of keys. Choose a sorting criterion to change the order of displayed instruments.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+3. **Load More**: Click the "Load More" button to load additional instrument cards, allowing you to view more products.
 
-### `npm run build` fails to minify
+4. **Adding to Cart**: Click the "Add to Cart" button on an instrument card to add it to your shopping cart. A modal will appear confirming the item's addition to the cart.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+5. **Clearing Filters**: To reset filters, click the "Clear all Filters" button in the left sidebar.

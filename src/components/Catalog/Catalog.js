@@ -458,7 +458,7 @@ export default function Catalog() {
 					onClick={clearAllFilters}
 					className={style.clear_all_filters}
 				>
-					Clear all filters
+					Clear all Filters
 				</button>
 			</aside>
 

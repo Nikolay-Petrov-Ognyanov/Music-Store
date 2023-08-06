@@ -27,8 +27,9 @@ export default function Card({ item }) {
     return <article className={style.card}>
         <div className={style.image_container}>
             <img
-                src={item.image} alt={item.name}
                 className={item.name === "SPIX 96" ? style.spix_96 : ""}
+                src={item.image}
+                alt={item.name}
             />
         </div>
 
@@ -55,7 +56,7 @@ export default function Card({ item }) {
             <button
                 className={style.button}
                 onClick={handleAddToCart}
-            >Add to cart
+            >Add to Cart
             </button>
         </div>
     </article>
