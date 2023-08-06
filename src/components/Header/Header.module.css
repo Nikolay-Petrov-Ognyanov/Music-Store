@@ -36,7 +36,7 @@
     gap: calc(1vw * var(--scale));
     justify-content: space-evenly;
     color: white;
-    height: 5vw;
+    height: 3vw;
     align-items: center;
     margin-top: calc(1vw * var(--scale)) ;
     margin-bottom: calc(1vw * var(--scale));

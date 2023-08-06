@@ -8,16 +8,24 @@
 }
 
 .top {
+    top: 4vw;
+    height: calc(4vw * var(--scale));
+    width: 100%;
     margin: calc(1vw * var(--scale));
-    border-radius: calc(3vw * var(--scale));
+    /* border-radius: calc(3vw * var(--scale)); */
     text-align: center;
     display: flex;
     gap: calc(1vw * var(--scale));
-    justify-content: space-evenly;
-    height: calc(3vw * var(--scale));
+    justify-content: center;
     align-items: center;
     color: white;
     font-size: calc(1.5vw * var(--scale));
+    position: fixed;
+    z-index: 200;
+}
+
+.top_hide {
+    overflow: hidden;
 }
 
 .left {
@@ -26,7 +34,7 @@
     flex-direction: column;
     color: white;
     position: sticky;
-    top: 7vw;
+    top: 9vw;
     height: fit-content;
     border: calc(0.25vw * var(--scale)) solid;
     border-radius: calc(1.5vw * var(--scale));
@@ -113,6 +121,7 @@
     align-items: center;
     gap: calc(0.5vw * var(--scale));
     width: calc(23.25vw * var(--scale));
+    background-color: transparent;
 }
 
 .items_counter {
@@ -123,7 +132,6 @@
     margin-top: 8vw;
     display: flex;
     flex-direction: column;
-    z-index: 2;
     background-color: transparent;
     pointer-events: none;
 }
@@ -168,6 +176,7 @@
 .bottom {
     display: flex;
     color: white;
+    margin-top: 3vw;
 }
 
 .cards {
@@ -282,13 +291,19 @@
 }
 
 @media (max-width: 600px) {
+    .top {
+        top: 18vw;
+        height: 9vw;
+    }
+
     .bottom {
         gap: 2vw;
+        margin-top: 9vw;
     }
 
     .left {
         width: 47vw;
-        top: 20vw;
+        top: 29vw;
     }
 
     .right {

@@ -83,6 +83,8 @@ export default function Catalog() {
 				}))
 			}
 		}
+
+		scrollToTop()
 	}, [filteredByNumberOfKeys])
 
 	const clearAllFilters = useCallback(() => {
@@ -157,6 +159,7 @@ export default function Catalog() {
 
 		setManufacturers(sortedManufacturers)
 		setFilteredByPrice(filtered_by_price)
+		scrollToTop()
 	}, [priceRange, instruments])
 
 	useEffect(() => {
@@ -289,6 +292,14 @@ export default function Catalog() {
 		setPendingInsturments(state => [...state].slice(countPerLoad))
 	}
 
+	function topClassName() {
+		if (showDropdownMenu) {
+			return `${style.top}`
+		} else {
+			return `${style.top} ${style.top_hide}`
+		}
+	}
+
 	function loadMoreButtonClassName() {
 		if (displayedInstruments.length && sortedInstruments.length
 			&& displayedInstruments.length < sortedInstruments.length) {
@@ -307,7 +318,7 @@ export default function Catalog() {
 	}
 
 	return <section className={style.catalog}>
-		<div className={style.top}>
+		<div className={topClassName()}>
 			<div className={style.sorting_container} >
 				<span>Sort by:</span>
 
