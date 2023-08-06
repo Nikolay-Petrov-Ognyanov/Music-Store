@@ -20,13 +20,13 @@ To run the Music Store Web Application locally, follow these steps:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/music-store-app.git
+    git clone https://github.com/Nikolay-Petrov-Ognyanov/Music-Store.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd music-store-app
+    cd Music-Store
     ```
 
 3. Install dependencies:

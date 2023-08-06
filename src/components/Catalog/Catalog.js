@@ -23,7 +23,7 @@ export default function Catalog() {
 	// Extract the category from the route parameters
 	const { category } = useParams()
 
-	// State variables to manage various filters and display settings
+	// State variables to manage filters and display settings
 	const [instruments, setInstruments] = useState(null)
 	const [filteredByPrice, setFilteredByPrice] = useState([])
 	const [filteredByManufacturer, setFilteredByManufacturer] = useState([])
