@@ -1,5 +1,5 @@
 import style from "./Catalog.module.css"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Card from "../Card/Card"
 import Slider from "rc-slider"
@@ -44,6 +44,10 @@ export default function Catalog() {
 
 	const [scrollPosition, setScrollPosition] = useState(0)
 	const [scrollDirection, setScrollDirection] = useState("down")
+
+	const [leftHeight, setLeftHeight] = useState(0)
+
+	const leftRef = useRef(null)
 
 	const keys = category && category === "accordions" ? "Basses" : "Keys"
 
@@ -279,6 +283,12 @@ export default function Catalog() {
 		}
 	}, [scrollPosition])
 
+	useEffect(() => {
+		if (leftRef.current) setLeftHeight(leftRef.current.clientHeight)
+	}, [leftRef, category, navigate])
+
+	useEffect(() => { console.log({ leftHeight }) }, [leftHeight])
+
 	function handleManufacturerCheckboxChange(manufacturer) {
 		setSelectedManufacturers(previouslySelected => {
 			if (previouslySelected.includes(manufacturer)) {
@@ -391,7 +401,7 @@ export default function Catalog() {
 		</div>
 
 		<div className={style.bottom}>
-			<aside className={leftClassName()}>
+			<aside className={leftClassName()} ref={leftRef}>
 				<div className={style.slider_container}>
 					<h2 className={style.h2}>Price</h2>
 

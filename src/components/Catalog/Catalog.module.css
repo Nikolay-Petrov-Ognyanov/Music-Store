@@ -3,7 +3,6 @@
 .catalog {
     display: flex;
     align-items: center;
-    /* justify-content: flex-end; */
     flex-direction: column;
     color: white;
 }
@@ -39,6 +38,7 @@
     border: calc(0.25vw * var(--scale)) solid;
     border-radius: calc(1.5vw * var(--scale));
     padding: 0 calc(0.5vw * var(--scale));
+    transition: transform 0.3s ease-in-out;
 }
 
 .left_scroll_up {
@@ -197,8 +197,6 @@
     height: calc(3vw * var(--scale));
     border: calc(0.25vw * var(--scale)) solid;
     border-radius: calc(2vw * var(--scale));
-    /* margin: calc(0.5vw * var(--scale)); */
-    margin-top: calc(2vw * var(--scale));
     margin-bottom: calc(0.5vw * var(--scale));
     width: 100%;
     cursor: pointer;
