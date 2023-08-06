@@ -1,5 +1,5 @@
 import style from "./Catalog.module.css"
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Card from "../Card/Card"
 import Slider from "rc-slider"
@@ -24,7 +24,7 @@ export default function Catalog() {
 	const [sortedInstruments, setSortedInstruments] = useState([])
 	const [displayedInstruments, setDisplayedInstruments] = useState([])
 	const [pendingInstruments, setPendingInsturments] = useState([])
-	const [countPerLoad, setCountPerLoad] = useState(width && width > 600 ? 9 : 5)
+	const [countPerLoad, setCountPerLoad] = useState(width && width > 768 ? 9 : 5)
 
 	const [showDropdownMenu, setShowDropdownMenu] = useState(false)
 	const [sortingCriteria, setSortingCriteria] = useState("Alphabetical A-Z")
@@ -41,13 +41,6 @@ export default function Catalog() {
 
 	const [selectedManufacturers, setSelectedManufacturers] = useState([])
 	const [selectedNumbersOfKeys, setSelectedNumbersOfKeys] = useState([])
-
-	const [scrollPosition, setScrollPosition] = useState(0)
-	const [scrollDirection, setScrollDirection] = useState("down")
-
-	const [leftHeight, setLeftHeight] = useState(0)
-
-	const leftRef = useRef(null)
 
 	const keys = category && category === "accordions" ? "Basses" : "Keys"
 
@@ -260,34 +253,13 @@ export default function Catalog() {
 	}, [filteredByNumberOfKeys, handleSorting, sortingCriteria])
 
 	useEffect(() => {
-		setCountPerLoad(width && width > 600 ? 9 : 5)
+		setCountPerLoad(width && width > 768 ? 9 : 5)
 	}, [width])
 
 	useEffect(() => {
 		setDisplayedInstruments(sortedInstruments.slice(0, countPerLoad))
 		setPendingInsturments(sortedInstruments.slice(countPerLoad))
 	}, [countPerLoad, sortedInstruments, sortingCriteria])
-
-	useEffect(() => {
-		function handleScroll() {
-			const newScrollPosition = window.scrollY
-
-			setScrollDirection(newScrollPosition > scrollPosition ? "down" : "up")
-			setScrollPosition(newScrollPosition)
-		}
-
-		window.addEventListener("scroll", handleScroll)
-
-		return () => {
-			window.removeEventListener("scroll", handleScroll)
-		}
-	}, [scrollPosition])
-
-	useEffect(() => {
-		if (leftRef.current) setLeftHeight(leftRef.current.clientHeight)
-	}, [leftRef, category, navigate])
-
-	useEffect(() => { console.log({ leftHeight }) }, [leftHeight])
 
 	function handleManufacturerCheckboxChange(manufacturer) {
 		setSelectedManufacturers(previouslySelected => {
@@ -322,17 +294,9 @@ export default function Catalog() {
 
 	function topClassName() {
 		if (showDropdownMenu) {
-			return `${style.top}`
+			return `${style.top_container}`
 		} else {
-			return `${style.top} ${style.top_hide}`
-		}
-	}
-
-	function leftClassName() {
-		if (scrollDirection === "up") {
-			return `${style.left} ${style.left_scroll_up}`
-		} else if (scrollDirection === "down") {
-			return `${style.left} ${style.left_scroll_down}`
+			return `${style.top_container} ${style.top_container_hide}`
 		}
 	}
 
@@ -400,72 +364,75 @@ export default function Catalog() {
 			</span>
 		</div>
 
-		<div className={style.bottom}>
-			<aside className={leftClassName()} ref={leftRef}>
-				<div className={style.slider_container}>
-					<h2 className={style.h2}>Price</h2>
+		<div className={style.bottom_container}>
+			<aside className={style.left_container}>
+				<div className={style.filters_wrapper}>
 
-					<Slider
-						min={lowestPrice}
-						max={highestPrice}
-						value={priceRange}
-						onChange={(values) => setPriceRange(values)}
-						range
-						step={(highestPrice - lowestPrice) / 10}
-						className={style["rc-slider"]}
-					/>
+					<div className={style.slider_container}>
+						<h2 className={style.h2}>Price</h2>
 
-					<p className={style.price_range} >
-						<span>{Math.floor(priceRange[0])}</span>
-						<span>{Math.ceil(priceRange[1])}</span>
-					</p>
-				</div>
+						<Slider
+							min={lowestPrice}
+							max={highestPrice}
+							value={priceRange}
+							onChange={(values) => setPriceRange(values)}
+							range
+							step={(highestPrice - lowestPrice) / 10}
+							className={style["rc-slider"]}
+						/>
 
-				<div className={style.filter_container}>
-					<h2 className={style.h2}>Manufacturer</h2>
-
-					<div className={style.filtering_criteria_container}>
-						{manufacturers.map((manufacturer, index) => (
-							<label
-								key={index}
-								className={style.filtering_criteria}
-							>
-								<input
-									type="checkbox"
-									className={style.checkbox}
-									checked={selectedManufacturers.includes(manufacturer)}
-									onChange={() => handleManufacturerCheckboxChange(manufacturer)}
-								/>
-
-								<span className={style.filtering_criteria_span}>
-									{manufacturer} ({countOfInstrumentsFrom[manufacturer]})
-								</span>
-							</label>
-						))}
+						<p className={style.price_range} >
+							<span>{Math.floor(priceRange[0])}</span>
+							<span>{Math.ceil(priceRange[1])}</span>
+						</p>
 					</div>
-				</div>
 
-				<div className={style.filter_container}>
-					<h2 className={style.h2}>{keys}</h2>
+					<div className={style.filter_container}>
+						<h2 className={style.h2}>Manufacturer</h2>
 
-					<div className={style.filtering_criteria_container}>
-						{numbersOfKeys.map((numberOfKeys, index) => (
-							<label
-								key={index}
-								className={style.filtering_criteria}
-							>
-								<input
-									type="checkbox"
-									className={style.checkbox}
-									checked={selectedNumbersOfKeys.includes(numberOfKeys)}
-									onChange={() => handleNumberOfKeysCheckboxChange(numberOfKeys)}
-								/>
+						<div className={style.filtering_criteria_container}>
+							{manufacturers.map((manufacturer, index) => (
+								<label
+									key={index}
+									className={style.filtering_criteria}
+								>
+									<input
+										type="checkbox"
+										className={style.checkbox}
+										checked={selectedManufacturers.includes(manufacturer)}
+										onChange={() => handleManufacturerCheckboxChange(manufacturer)}
+									/>
 
-								<span className={style.filtering_criteria_span}>
-									{numberOfKeys} ({countOfInstrumentsWith[numberOfKeys]})
-								</span>
-							</label>
-						))}
+									<span className={style.filtering_criteria_span}>
+										{manufacturer} ({countOfInstrumentsFrom[manufacturer]})
+									</span>
+								</label>
+							))}
+						</div>
+					</div>
+
+					<div className={style.filter_container}>
+						<h2 className={style.h2}>{keys}</h2>
+
+						<div className={style.filtering_criteria_container}>
+							{numbersOfKeys.map((numberOfKeys, index) => (
+								<label
+									key={index}
+									className={style.filtering_criteria}
+								>
+									<input
+										type="checkbox"
+										className={style.checkbox}
+										checked={selectedNumbersOfKeys.includes(numberOfKeys)}
+										onChange={() => handleNumberOfKeysCheckboxChange(numberOfKeys)}
+									/>
+
+									<span className={style.filtering_criteria_span}>
+										{numberOfKeys} ({countOfInstrumentsWith[numberOfKeys]})
+									</span>
+								</label>
+							))}
+						</div>
 					</div>
 				</div>
 
@@ -477,7 +444,7 @@ export default function Catalog() {
 				</button>
 			</aside>
 
-			<div className={style.right}>
+			<div className={style.right_container}>
 				<div className={style.cards}>
 					{displayedInstruments && displayedInstruments.map(item => (
 						<Card key={item.id} item={item} />

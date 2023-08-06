@@ -38,7 +38,7 @@
     color: white;
     height: 3vw;
     align-items: center;
-    margin-top: calc(1vw * var(--scale)) ;
+    margin-top: calc(1vw * var(--scale));
     margin-bottom: calc(1vw * var(--scale));
 }
 
@@ -57,7 +57,7 @@
     background-color: white;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .nav {
         height: 16vw;
     }
