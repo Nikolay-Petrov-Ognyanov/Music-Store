@@ -42,7 +42,10 @@ export default function Catalog() {
 	const [selectedManufacturers, setSelectedManufacturers] = useState([])
 	const [selectedNumbersOfKeys, setSelectedNumbersOfKeys] = useState([])
 
-	const KEYS = category && category === "accordions" ? "Basses" : "Keys"
+	const [scrollPosition, setScrollPosition] = useState(0)
+	const [scrollDirection, setScrollDirection] = useState("down")
+
+	const keys = category && category === "accordions" ? "Basses" : "Keys"
 
 	const sortingCriteriaVariants = [
 		"Alphabetical A-Z",
@@ -261,6 +264,21 @@ export default function Catalog() {
 		setPendingInsturments(sortedInstruments.slice(countPerLoad))
 	}, [countPerLoad, sortedInstruments, sortingCriteria])
 
+	useEffect(() => {
+		function handleScroll() {
+			const newScrollPosition = window.scrollY
+
+			setScrollDirection(newScrollPosition > scrollPosition ? "down" : "up")
+			setScrollPosition(newScrollPosition)
+		}
+
+		window.addEventListener("scroll", handleScroll)
+
+		return () => {
+			window.removeEventListener("scroll", handleScroll)
+		}
+	}, [scrollPosition])
+
 	function handleManufacturerCheckboxChange(manufacturer) {
 		setSelectedManufacturers(previouslySelected => {
 			if (previouslySelected.includes(manufacturer)) {
@@ -297,6 +315,14 @@ export default function Catalog() {
 			return `${style.top}`
 		} else {
 			return `${style.top} ${style.top_hide}`
+		}
+	}
+
+	function leftClassName() {
+		if (scrollDirection === "up") {
+			return `${style.left} ${style.left_scroll_up}`
+		} else if (scrollDirection === "down") {
+			return `${style.left} ${style.left_scroll_down}`
 		}
 	}
 
@@ -365,7 +391,7 @@ export default function Catalog() {
 		</div>
 
 		<div className={style.bottom}>
-			<aside className={style.left}>
+			<aside className={leftClassName()}>
 				<div className={style.slider_container}>
 					<h2 className={style.h2}>Price</h2>
 
@@ -410,7 +436,7 @@ export default function Catalog() {
 				</div>
 
 				<div className={style.filter_container}>
-					<h2 className={style.h2}>{KEYS}</h2>
+					<h2 className={style.h2}>{keys}</h2>
 
 					<div className={style.filtering_criteria_container}>
 						{numbersOfKeys.map((numberOfKeys, index) => (

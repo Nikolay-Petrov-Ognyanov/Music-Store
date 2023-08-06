@@ -2,17 +2,17 @@
 
 .catalog {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    /* justify-content: flex-end; */
+    flex-direction: column;
     color: white;
 }
 
 .top {
     top: 4vw;
     height: calc(4vw * var(--scale));
-    width: 100%;
+    width: 96vw;
     margin: calc(1vw * var(--scale));
-    /* border-radius: calc(3vw * var(--scale)); */
     text-align: center;
     display: flex;
     gap: calc(1vw * var(--scale));
@@ -32,17 +32,28 @@
     width: 23.25vw;
     display: flex;
     flex-direction: column;
+    align-items: center;
     color: white;
     position: sticky;
-    top: 9vw;
     height: fit-content;
     border: calc(0.25vw * var(--scale)) solid;
     border-radius: calc(1.5vw * var(--scale));
+    padding: 0 calc(0.5vw * var(--scale));
+}
+
+.left_scroll_up {
+    /* top: 9vw; */
+    /* bottom: auto; */
+}
+
+.left_scroll_down {
+    /* top: -11vw; */
+    /* bottom: auto; */
 }
 
 .filter_container {
-    padding: 0 calc(1vw * var(--scale));
     margin: calc(2vw * var(--scale)) 0vw;
+    width: 100%;
 }
 
 .h2 {
@@ -57,19 +68,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .rc-slider {
     width: 80% !important;
-}
-
-.rc-slider-track {
-    height: 5vw !important;
-    background-color: red !important;
-}
-
-.rc-slder-rail {
-    background-color: red !important;
 }
 
 .price_range {
@@ -170,6 +173,7 @@
 
 .li:hover {
     color: black;
+    border-color: black;
     background-color: white;
 }
 
@@ -189,11 +193,14 @@
 
 .clear_all_filters {
     color: white;
-    font-size: calc(2vw * var(--scale));
+    font-size: calc(1.5vw * var(--scale));
     height: calc(3vw * var(--scale));
     border: calc(0.25vw * var(--scale)) solid;
     border-radius: calc(2vw * var(--scale));
-    margin: calc(1vw * var(--scale));
+    /* margin: calc(0.5vw * var(--scale)); */
+    margin-top: calc(2vw * var(--scale));
+    margin-bottom: calc(0.5vw * var(--scale));
+    width: 100%;
     cursor: pointer;
     display: flex;
     align-items: center;
