@@ -1,22 +1,29 @@
 import style from "./Catalog.module.css"
+
 import { useState, useEffect, useCallback } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import Card from "../Card/Card"
+import { useDispatch, useSelector } from "react-redux"
+
 import Slider from "rc-slider"
 import "rc-slider/assets/index.css"
-import { hideModal } from "../../redux/features/modal"
-import { useDispatch, useSelector } from "react-redux"
+
+import Card from "../Card/Card"
+
 import scrollToTop from "../../utility/scrollToTop"
+import { hideModal } from "../../redux/features/modal"
 
 export default function Catalog() {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
+	// Selectors to retrieve data from the Redux store
 	const modal = useSelector(state => state.modal.value)
 	const width = useSelector(state => state.width.value)
 
+	// Extract the category from the route parameters
 	const { category } = useParams()
 
+	// State variables to manage various filters and display settings
 	const [instruments, setInstruments] = useState(null)
 	const [filteredByPrice, setFilteredByPrice] = useState([])
 	const [filteredByManufacturer, setFilteredByManufacturer] = useState([])
@@ -25,25 +32,19 @@ export default function Catalog() {
 	const [displayedInstruments, setDisplayedInstruments] = useState([])
 	const [pendingInstruments, setPendingInsturments] = useState([])
 	const [countPerLoad, setCountPerLoad] = useState(width && width > 768 ? 9 : 5)
-
 	const [showDropdownMenu, setShowDropdownMenu] = useState(false)
 	const [sortingCriteria, setSortingCriteria] = useState("Alphabetical A-Z")
-
 	const [lowestPrice, setLowestPrice] = useState(0)
 	const [highestPrice, setHighestPrice] = useState(0)
 	const [priceRange, setPriceRange] = useState([0, 0])
-
 	const [manufacturers, setManufacturers] = useState([])
 	const [numbersOfKeys, setNumbersOfKeys] = useState([])
-
 	const [countOfInstrumentsFrom, setCountOfInstrumentsFrom] = useState({})
 	const [countOfInstrumentsWith, setCountOfInstrumentsWith] = useState({})
-
 	const [selectedManufacturers, setSelectedManufacturers] = useState([])
 	const [selectedNumbersOfKeys, setSelectedNumbersOfKeys] = useState([])
 
-	const keys = category && category === "accordions" ? "Basses" : "Keys"
-
+	// Variants for sorting criteria
 	const sortingCriteriaVariants = [
 		"Alphabetical A-Z",
 		"Alphabetical Z-A",
@@ -51,6 +52,7 @@ export default function Catalog() {
 		"Price descending"
 	]
 
+	// Function to handle sorting based on selected criteria
 	const handleSorting = useCallback(criteria => {
 		if (filteredByNumberOfKeys) {
 			if (criteria === "Alphabetical A-Z") {
@@ -87,6 +89,7 @@ export default function Catalog() {
 		scrollToTop()
 	}, [filteredByNumberOfKeys])
 
+	// Function to clear all filters
 	const clearAllFilters = useCallback(() => {
 		setPriceRange([lowestPrice, highestPrice])
 		setSelectedManufacturers([])
@@ -94,6 +97,69 @@ export default function Catalog() {
 		scrollToTop()
 	}, [lowestPrice, highestPrice])
 
+	// Function to handle manufacturer checkbox changes
+	function handleManufacturerCheckboxChange(manufacturer) {
+		setSelectedManufacturers(previouslySelected => {
+			if (previouslySelected.includes(manufacturer)) {
+				return previouslySelected.filter(m => m !== manufacturer)
+			} else {
+				return [...previouslySelected, manufacturer]
+			}
+		})
+
+		scrollToTop()
+	}
+
+	// Function to handle number of keys checkbox changes
+	function handleNumberOfKeysCheckboxChange(numberofKeys) {
+		setSelectedNumbersOfKeys(previouslySelected => {
+			if (previouslySelected.includes(numberofKeys)) {
+				return previouslySelected.filter(n => n !== numberofKeys)
+			} else {
+				return [...previouslySelected, numberofKeys]
+			}
+		})
+
+		scrollToTop()
+	}
+
+	// Function to load more instruments
+	function loadMore() {
+		const pending = [...pendingInstruments].slice(0, countPerLoad)
+
+		setDisplayedInstruments(state => [...state].concat(pending))
+		setPendingInsturments(state => [...state].slice(countPerLoad))
+	}
+
+	// Function to determine the CSS class for the top container
+	function topContainerClassName() {
+		if (showDropdownMenu) {
+			return `${style.top_container}`
+		} else {
+			return `${style.top_container} ${style.top_container_hide}`
+		}
+	}
+
+	// Function to determine the CSS class for the load more button
+	function loadMoreButtonClassName() {
+		if (displayedInstruments.length && sortedInstruments.length
+			&& displayedInstruments.length < sortedInstruments.length) {
+			return style.load_more_button_show
+		} else {
+			return style.load_more_button_hide
+		}
+	}
+
+	// Function to determine the CSS class for the modal container
+	function modalContainerClassName() {
+		if (modal.display) {
+			return style.modal_container_show
+		} else {
+			return style.modal_container_hide
+		}
+	}
+
+	// Fetch data and update state variables on component mount
 	useEffect(() => {
 		if (!category) navigate("/catalog/accordions")
 
@@ -128,27 +194,30 @@ export default function Catalog() {
 		clearAllFilters()
 	}, [category, navigate, clearAllFilters])
 
+	// Update state variables based on price range
 	useEffect(() => {
 		const filtered_by_price = instruments && instruments.filter(instrument => {
 			const price = instrument.price * (1 - instrument.discount)
 
 			if (price >= priceRange[0] && price <= priceRange[1]) {
 				return instrument
-			} else return null
+			} else {
+				return null
+			}
 		})
 
 		const uniqueManufacturers = new Set()
 		const instrumentsFrom = {}
 
 		filtered_by_price && filtered_by_price.forEach(instrument => {
-			const manufacturer = instrument.manufacturer
+			const thisManufacturer = instrument.manufacturer
 
-			if (!instrumentsFrom[manufacturer]) {
-				instrumentsFrom[manufacturer] = 0
+			if (!instrumentsFrom[thisManufacturer]) {
+				instrumentsFrom[thisManufacturer] = 0
 			}
 
-			instrumentsFrom[manufacturer]++
-			uniqueManufacturers.add(instrument.manufacturer)
+			instrumentsFrom[thisManufacturer]++
+			uniqueManufacturers.add(thisManufacturer)
 		})
 
 		setCountOfInstrumentsFrom(instrumentsFrom)
@@ -162,16 +231,19 @@ export default function Catalog() {
 		scrollToTop()
 	}, [priceRange, instruments])
 
+	// Update state variables based on selected manufacturers
 	useEffect(() => {
 		const filtered_by_manufacturer = (
 			filteredByPrice && filteredByPrice.filter(instrument => {
 				if (selectedManufacturers.includes(instrument.manufacturer)) {
 					return instrument
-				} else return null
+				} else {
+					return null
+				}
 			})
 		)
 
-		const filtered = (
+		const filteredIntruments = (
 			(filtered_by_manufacturer
 				&& filtered_by_manufacturer.length > 0
 				&& filtered_by_manufacturer
@@ -185,16 +257,16 @@ export default function Catalog() {
 		const uniqueNumbersOfKeys = new Set()
 		const instrumentsWith = {}
 
-		filtered && filtered.forEach(instrument => {
-			const numberOfKeys = instrument.keys > 0 ? (
+		filteredIntruments && filteredIntruments.forEach(instrument => {
+			const thisNumberOfKeys = instrument.keys > 0 ? (
 				instrument.keys
 			) : instrument.basses
 
-			if (!instrumentsWith[numberOfKeys]) {
-				instrumentsWith[numberOfKeys] = 0
+			if (!instrumentsWith[thisNumberOfKeys]) {
+				instrumentsWith[thisNumberOfKeys] = 0
 			}
 
-			instrumentsWith[numberOfKeys]++
+			instrumentsWith[thisNumberOfKeys]++
 
 			if (instrument.keys > 0) {
 				uniqueNumbersOfKeys.add(instrument.keys)
@@ -212,12 +284,13 @@ export default function Catalog() {
 		setNumbersOfKeys(sortedNumbersOfKeys)
 
 		if (Object.values(selectedManufacturers).some(v => v)) {
-			setFilteredByManufacturer(filtered)
+			setFilteredByManufacturer(filteredIntruments)
 		} else {
 			setFilteredByManufacturer(filteredByPrice)
 		}
 	}, [filteredByPrice, selectedManufacturers])
 
+	// Update state variables based on selected number of keys
 	useEffect(() => {
 		const previouslyFiltered = (
 			(filteredByManufacturer
@@ -248,77 +321,24 @@ export default function Catalog() {
 		}
 	}, [filteredByPrice, filteredByManufacturer, selectedNumbersOfKeys])
 
+	// Update sorting and displayed instruments when the sorting criteria changes
 	useEffect(() => {
 		handleSorting(sortingCriteria)
 	}, [filteredByNumberOfKeys, handleSorting, sortingCriteria])
 
+	// Update count per load when the window width changes
 	useEffect(() => {
 		setCountPerLoad(width && width > 768 ? 9 : 5)
 	}, [width])
 
+	// Update displayed and pending instruments when the count per load changes
 	useEffect(() => {
 		setDisplayedInstruments(sortedInstruments.slice(0, countPerLoad))
 		setPendingInsturments(sortedInstruments.slice(countPerLoad))
 	}, [countPerLoad, sortedInstruments, sortingCriteria])
 
-	function handleManufacturerCheckboxChange(manufacturer) {
-		setSelectedManufacturers(previouslySelected => {
-			if (previouslySelected.includes(manufacturer)) {
-				return previouslySelected.filter(m => m !== manufacturer)
-			} else {
-				return [...previouslySelected, manufacturer]
-			}
-		})
-
-		scrollToTop()
-	}
-
-	function handleNumberOfKeysCheckboxChange(numberofKeys) {
-		setSelectedNumbersOfKeys(previouslySelected => {
-			if (previouslySelected.includes(numberofKeys)) {
-				return previouslySelected.filter(n => n !== numberofKeys)
-			} else {
-				return [...previouslySelected, numberofKeys]
-			}
-		})
-
-		scrollToTop()
-	}
-
-	function loadMore() {
-		const pending = [...pendingInstruments].slice(0, countPerLoad)
-
-		setDisplayedInstruments(state => [...state].concat(pending))
-		setPendingInsturments(state => [...state].slice(countPerLoad))
-	}
-
-	function topClassName() {
-		if (showDropdownMenu) {
-			return `${style.top_container}`
-		} else {
-			return `${style.top_container} ${style.top_container_hide}`
-		}
-	}
-
-	function loadMoreButtonClassName() {
-		if (displayedInstruments.length && sortedInstruments.length
-			&& displayedInstruments.length < sortedInstruments.length) {
-			return style.load_more_button_show
-		} else {
-			return style.load_more_button_hide
-		}
-	}
-
-	function modalContainerClassName() {
-		if (modal.display) {
-			return style.modal_container_show
-		} else {
-			return style.modal_container_hide
-		}
-	}
-
 	return <section className={style.catalog}>
-		<div className={topClassName()}>
+		<div className={topContainerClassName()}>
 			<div className={style.sorting_container} >
 				<span>Sort by:</span>
 
@@ -334,11 +354,7 @@ export default function Catalog() {
 						{sortingCriteria}
 					</p>
 
-					<ul
-						className={showDropdownMenu ? (
-							style.ul_show
-						) : style.ul_hide}
-					>
+					<ul className={showDropdownMenu ? style.ul_show : style.ul_hide}>
 						{(sortingCriteriaVariants.filter(criteria => (
 							criteria !== sortingCriteria
 						)).map((criteria, index) => (
@@ -360,7 +376,7 @@ export default function Catalog() {
 			</div>
 
 			<span className={style.items_counter}>
-				Showing {displayedInstruments.length} products out of {sortedInstruments.length}
+				Showing {displayedInstruments.length} products out of {sortedInstruments.length}.
 			</span>
 		</div>
 
@@ -372,13 +388,13 @@ export default function Catalog() {
 						<h2 className={style.h2}>Price</h2>
 
 						<Slider
+							className={style.rc_slider}
 							min={lowestPrice}
 							max={highestPrice}
 							value={priceRange}
-							onChange={(values) => setPriceRange(values)}
-							range
 							step={(highestPrice - lowestPrice) / 10}
-							className={style["rc-slider"]}
+							range
+							onChange={(values) => setPriceRange(values)}
 						/>
 
 						<p className={style.price_range} >
@@ -412,7 +428,9 @@ export default function Catalog() {
 					</div>
 
 					<div className={style.filter_container}>
-						<h2 className={style.h2}>{keys}</h2>
+						<h2 className={style.h2}>
+							{category && category === "accordions" ? "Basses" : "Keys"}
+						</h2>
 
 						<div className={style.filtering_criteria_container}>
 							{numbersOfKeys.map((numberOfKeys, index) => (
@@ -447,7 +465,10 @@ export default function Catalog() {
 			<div className={style.right_container}>
 				<div className={style.cards}>
 					{displayedInstruments && displayedInstruments.map(item => (
-						<Card key={item.id} item={item} />
+						<Card
+							key={item.id}
+							item={item}
+						/>
 					))}
 				</div>
 			</div>

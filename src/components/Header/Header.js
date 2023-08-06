@@ -1,7 +1,9 @@
 import style from "./Header.module.css"
-import logo from "../../music-store-logo.png"
+
 import { NavLink } from "react-router-dom"
-import  scrollToTop  from "../../utility/scrollToTop"
+
+import logo from "../../music-store-logo.png"
+import scrollToTop from "../../utility/scrollToTop"
 
 export default function Header() {
     return <header className={style.header}>

@@ -1,8 +1,11 @@
 import style from "./Footer.module.css"
-import  scrollToTop  from "../../utility/scrollToTop"
+
 import { NavLink, useLocation } from "react-router-dom"
 
+import scrollToTop from "../../utility/scrollToTop"
+
 export default function Footer() {
+    // Get the current pathname from the location and extract the last segment
     const pathname = useLocation().pathname.split("/").pop()
 
     return <footer className={style.footer}> <nav className={style.nav}>
