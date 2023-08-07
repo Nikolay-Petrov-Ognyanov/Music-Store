@@ -37,6 +37,7 @@ export default function Catalog() {
 	const [lowestPrice, setLowestPrice] = useState(0)
 	const [highestPrice, setHighestPrice] = useState(0)
 	const [priceRange, setPriceRange] = useState([0, 0])
+	const [sliderValue, setSliderValue] = useState(priceRange)
 	const [manufacturers, setManufacturers] = useState([])
 	const [numbersOfKeys, setNumbersOfKeys] = useState([])
 	const [countOfInstrumentsFrom, setCountOfInstrumentsFrom] = useState({})
@@ -395,6 +396,25 @@ export default function Catalog() {
 							step={(highestPrice - lowestPrice) / 10}
 							range
 							onChange={(values) => setPriceRange(values)}
+							onTouchStart={() => setShowDropdownMenu(false)}
+
+							onTouchMove={(event) => {
+								event.preventDefault()
+
+								const touch = event.touches[0]
+								const rect = event.target.getBoundingClientRect()
+								const offsetX = touch.clientX - rect.left
+								const ratio = offsetX / rect.width
+
+								const newValue = [
+									lowestPrice + (ratio * (highestPrice - lowestPrice)),
+									sliderValue[1]
+								]
+
+								setSliderValue(newValue)
+							}}
+
+							onTouchEnd={() => setPriceRange(sliderValue)}
 						/>
 
 						<p className={style.price_range} >
