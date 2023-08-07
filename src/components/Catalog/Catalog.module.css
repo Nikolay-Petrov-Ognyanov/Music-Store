@@ -86,7 +86,7 @@
     display: flex;
     align-items: center;
     font-size: calc(1.75vw * var(--scale));
-    padding: calc(1vw * var(--scale)) 0;
+    padding: calc(0.875vw * var(--scale)) 0;
 }
 
 .checkbox {
@@ -97,7 +97,7 @@
     width: calc(2vw * var(--scale));
     background-color: white;
     border-radius: calc(0.25vw * var(--scale));
-    margin-right: calc(0.5vw * var(--scale));
+    margin-right: calc(0.875vw * var(--scale));
     cursor: pointer;
 }
 
